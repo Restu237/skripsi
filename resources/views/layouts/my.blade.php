@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="{{asset('/assets/css/argon.css?v=1.2.0')}}" type="text/css">
 </head>
 
-<body class="bg-default">
+<bodys>
   <!-- Main content -->
   
     @yield('content')
@@ -36,6 +36,6 @@
 <script src="{{asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <!-- Argon JS -->
 <script src="{{asset('/assets/js/argon.js?v=1.2.0')}}"></script>
-</body>
+</bodys>
 
 </html>

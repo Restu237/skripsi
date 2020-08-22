@@ -2,6 +2,9 @@
 
 @section('content')
  <!-- Header -->
+ <div class="bg-default">
+
+ 
  <div class="header bg-gradient-primary py-lg-5">
     <div class="container">
       <div class="header-body text-center mb-7">
@@ -94,5 +97,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
   @endsection
