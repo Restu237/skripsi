@@ -7,9 +7,8 @@
       <div class="header-body text-center mb-7">
         <div class="row justify-content-center">
           <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-            <img class="img-fluid" src="{{asset('assets/img/oxone.png')}}" alt="Oxone Agent Portal">
+            <img class="img-fluid pb-5" src="{{asset('assets/img/oxone.png')}}" alt="Oxone Agent Portal">
           </div>
-         
         </div>
       </div>
     </div>
@@ -28,7 +27,7 @@
               <h1>Selamat Datang !</h1>
               <h2>Oxone Official Agent Site</h2>     
             </div>
-             <form method="POST" action="{{ route('login') }}">
+             <form method="POST" class="pt-2" action="{{ route('login') }}">
                 @csrf
 
                 <div class="form-group row">
