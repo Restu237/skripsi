@@ -17,11 +17,12 @@ class CreateCustomersTable extends Migration
             $table->integer('id');
             $table->string('kd_kstmr', 4);
             // CS0001
-            $table->string('nama');
+            $table->string('nama_perusahaan');
             $table->string('telepon', 13);
             $table->text('alamat', 225);
+            $table->string('contact_person');
+            $table->string('no_telepon', 13);
             $table->timestamps();
-
             $table->primary(['id', 'kd_kstmr']);
         });
     }
