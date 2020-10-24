@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateSalesOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,20 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sales_order', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('no_so', 9)->unique();
             $table->unsignedBigInteger('kd_kstmr');
-            $table->string('nama', 50);
-            $table->string('email', 50)->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('image')->nullable();
-            $table->smallInteger('type');
-            $table->rememberToken();
+            $table->unsignedBigInteger('kd_barang');
+            $table->string('nama_kstmr', 191);
+            $table->string('nama_barang', 191);
+            $table->string('satuan', 3);
+            $table->smallInteger('qty');
+            $table->string('keterangan', 50);
             $table->timestamps();
 
             $table->foreign('kd_kstmr')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('kd_barang')->references('id')->on('barang')->onDelete('cascade');
         });
     }
 
@@ -36,6 +37,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sales_orders');
     }
 }

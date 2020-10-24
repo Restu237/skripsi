@@ -14,8 +14,8 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->string('kd_kstmr', 4);
+            $table->bigIncrements('id');
+            $table->string('kd_kstmr', 9)->unique();
             // CS0001
             $table->string('nama_perusahaan');
             $table->string('telepon', 13);
@@ -23,7 +23,6 @@ class CreateCustomersTable extends Migration
             $table->string('contact_person');
             $table->string('handphone', 13);
             $table->timestamps();
-            $table->primary(['id', 'kd_kstmr']);
 
         });
     }
