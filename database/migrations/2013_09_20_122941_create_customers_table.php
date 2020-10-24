@@ -14,16 +14,17 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->integer('id');
+            $table->unsignedBigInteger('id');
             $table->string('kd_kstmr', 4);
             // CS0001
             $table->string('nama_perusahaan');
             $table->string('telepon', 13);
             $table->text('alamat', 225);
             $table->string('contact_person');
-            $table->string('no_telepon', 13);
+            $table->string('handphone', 13);
             $table->timestamps();
             $table->primary(['id', 'kd_kstmr']);
+
         });
     }
 
