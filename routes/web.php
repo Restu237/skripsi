@@ -11,6 +11,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/master', 'MasterController@index' );
     Route::get('/home/transaksi', 'TransaksiController@index');
     Route::get('/home/laporan', 'LaporanController@index');
+
+    // master 
+    Route::match(['get', 'post'], '/home/master/user', 'MasterController@masterUser');
     
 });
 

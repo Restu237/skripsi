@@ -18,7 +18,7 @@
                                 <div class="col-lg-4 col-md-6">
                                     <button type="button" class="btn-icon-clipboard" data-clipboard-text="active-40"
                                         title="" data-original-title="Konfigurasi User">
-                                        <a href="">
+                                        <a href="/home/master/user">
                                             <div>
                                                 <i class="fas fa-user"></i>
                                                 <span>Master Users</span>
