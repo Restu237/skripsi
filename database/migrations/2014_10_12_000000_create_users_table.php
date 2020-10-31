@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('kd_kstmr')->nullable();
+            $table->string('kd_kstmr')->nullable();
             $table->string('name', 50);
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('kd_kstmr')->references('id')->on('customers');
+            $table->foreign('kd_kstmr')->references('kd_kstmr')->on('customers');
         });
     }
 

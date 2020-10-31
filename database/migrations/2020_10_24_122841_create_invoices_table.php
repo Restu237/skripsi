@@ -14,9 +14,8 @@ class CreateInvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoice', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('kd_invoice', 9)->unique();
-            $table->unsignedBigInteger('kd_so');
+            $table->string('kd_invoice', 9);
+            $table->string('kd_so');
             $table->date('tanggal');
             $table->string('nama_kstmr', 191);
             $table->string('telepon_kstmr', 13);
@@ -28,8 +27,9 @@ class CreateInvoicesTable extends Migration
             $table->double('total');
             $table->double('grand_total');
             $table->timestamps();
+            $table->primary('kd_invoice');
 
-            $table->foreign('kd_so')->references('id')->on('surat_jalan')->onDelete('cascade');
+            $table->foreign('kd_so')->references('kd_so')->on('surat_jalan')->onDelete('cascade');
         });
     }
 

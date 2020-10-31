@@ -14,19 +14,19 @@ class CreateSalesOrdersTable extends Migration
     public function up()
     {
         Schema::create('sales_order', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('no_so', 9)->unique();
-            $table->unsignedBigInteger('kd_kstmr');
-            $table->unsignedBigInteger('kd_barang');
+            $table->string('kd_so', 9);
+            $table->string('kd_kstmr');
+            $table->string('kd_barang');
             $table->string('nama_kstmr', 191);
             $table->string('nama_barang', 191);
             $table->string('satuan', 3);
             $table->smallInteger('qty');
             $table->string('keterangan', 50);
             $table->timestamps();
+            $table->primary('kd_so');
 
-            $table->foreign('kd_kstmr')->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign('kd_barang')->references('id')->on('barang')->onDelete('cascade');
+            $table->foreign('kd_kstmr')->references('kd_kstmr')->on('customers')->onDelete('cascade');
+            $table->foreign('kd_barang')->references('kd_barang')->on('barang')->onDelete('cascade');
         });
     }
 

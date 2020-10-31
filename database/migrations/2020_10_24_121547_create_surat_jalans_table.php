@@ -14,19 +14,20 @@ class CreateSuratJalansTable extends Migration
     public function up()
     {
         Schema::create('surat_jalan', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('no_so');
-            $table->string('kd_do', 9);
+            $table->string('kd_do');
+            $table->string('kd_so');
+            $table->unsignedBigInteger('id_user');
             $table->date('tanggal');
             $table->string('nama_barang', 191);
             $table->string('kd_barang', 9);
             $table->smallInteger('qty');
             $table->string('keterangan', 50);
             $table->string('penerima');
-            $table->unsignedBigInteger('id_user');
             $table->string('pengirim');
             $table->timestamps();
-            $table->foreign('no_so')->references('id')->on('sales_order')->onDelete('cascade');
+            $table->primary('kd_do');
+
+            $table->foreign('kd_so')->references('kd_so')->on('sales_order')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users');
         });
     }
