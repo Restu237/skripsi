@@ -28,6 +28,18 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
+                                    <button type="button" class="btn-icon-clipboard" data-clipboard-text="album-2"
+                                        title="" data-original-title="Konfigurasi Kustomer">
+                                        <div>
+                                            <a href="/home/master/customers">
+                                                <i class="fas fa-users"></i>
+                                            <span>Master Customers</span>
+                                            </a>
+                                        </div>
+                                    </button>
+                                </div>
+                            
+                                <div class="col-lg-4 col-md-6">
                                     <button type="button" class="btn-icon-clipboard" data-clipboard-text="air-baloon"
                                         title="" data-original-title="Konfigurasi Barang">
                                         <div>
@@ -36,17 +48,6 @@
                                                 <span>Master Barang</span>
                                             </a>
                                            
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <button type="button" class="btn-icon-clipboard" data-clipboard-text="album-2"
-                                        title="" data-original-title="Konfigurasi Kustomer">
-                                        <div>
-                                            <a href="#">
-                                                <i class="fas fa-users"></i>
-                                            <span>Master Customers</span>
-                                            </a>
                                         </div>
                                     </button>
                                 </div>

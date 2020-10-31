@@ -18,12 +18,11 @@ class CreateCustomersTable extends Migration
             // CS0001
             $table->string('nama_perusahaan');
             $table->string('telepon', 13);
-            $table->text('alamat', 225);
+            $table->text('alamat');
             $table->string('contact_person');
             $table->string('handphone', 13);
             $table->timestamps();
             $table->primary('kd_kstmr');
-
         });
     }
 

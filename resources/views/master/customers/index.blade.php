@@ -11,7 +11,7 @@
                 <div class=" col ">
                     <div class="card">
                         <div class="card-header bg-transparent">
-                            <h3 class="mb-0 text-center"><b>MASTER USER</b></h3>
+                            <h3 class="mb-0 text-center"><b>MASTER CUSTOMERS</b></h3>
                         </div>
 
                         @if (Session::has('sukses'))
@@ -28,151 +28,138 @@
                         <div class="card-body">
                             <div class="baru pb-2">
                                 <button id="buat-baru" type="button" class="btn btn-sm" data-toggle="modal"
-                                    data-target="#create-user-baru"><i class="fas fa-plus"></i> </button>
-                                <p class="text-baru">Buat User Baru</p>
+                                    data-target="#create-customers-baru"><i class="fas fa-plus"></i> </button>
+                                <p class="text-baru">Buat Customers Baru</p>
                             </div>
                             <table id="user_master" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
+                                <thead style="text-wight: bold; text-size: 20px;">
                                     <tr>
-                                        <th>Nama</th>
-                                        <th>Customer</th>
-                                        <th>Email</th>
-                                        <th>Type</th>
+                                        <th>Kode Customers</th>
+                                        <th>Nama Perusahaan</th>
+                                        <th>Nomor Telepon</th>
+                                        <th>Contact Person</th>
+                                        <th>No Tel CP</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($user as $item)
+                                    @foreach ($datakstmr as $item)
                                     <tr>
-                                        <td>{{$item->name}}</td>
-                                        @if ($item->kd_kstmr == null)
-                                        <td>Belum Di Registrasikan Sebagai Agent</td>
-                                        @else
                                         <td>{{$item->kd_kstmr}}</td>
-                                        @endif
-                                        <td>{{$item->email}}</td>
-                                        @if ($item->type == 0)
-                                        <td> <a href="#" class="badge badge-pill badge-info">User Agent</a></td>
-                                        @else
-                                        <td><a href="#" class="badge badge-pill badge-default">Admin/Staff</a></td>
-                                        @endif
+                                        <td>{{$item->nama_perusahaan}}</td>
+                                        <td>{{$item->telepon}}</td>
+                                        <td>{{$item->contact_person}}</td>  
+                                        <td>{{$item->handphone}}</td>                                       
+
                                         <td class="text-center">
                                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#edit{{$item->id}}">Edit</button><button type="button"
-                                                data-toggle="modal" data-target="#modalKonfirmasi{{$item->id}}"
+                                                data-target="#edit{{$item->kd_kstmr}}">Edit</button><button type="button"
+                                                data-toggle="modal" data-target="#modalKonfirmasi{{$item->kd_kstmr}}"
                                                 class="btn btn-danger btn-sm">Delete</button>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="edit{{$item->id}}" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="edit{{$item->kd_kstmr}}" tabindex="-1" role="dialog"
                                         aria-labelledby="editUser" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-warning">
-                                                    <h5 class="modal-title text-white" id="editUser">Edit User</h5>
+                                                    <h5 class="modal-title text-white" id="editUser">Edit Customers</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" action="/home/master/user/{{$item->id}}">
+                                                <form method="POST" action="/home/master/customers/{{$item->kd_kstmr}}">
                                                         @csrf
                                                         @method('PUT')
 
                                                         <div class="form-group row">
-                                                            <label for="name"
-                                                                class="col-md-4 col-form-label text-md-left">{{ __('Name') }}</label>
-
+                                                            <label for="kd_kstmr" class="col-md-4 col-form-label text-md-left">Kode Kustomers</label>
+                                                            <div class="col-md-4">
+                                                            <input type="text" name="kd_kstmr" value="{{$item->kd_kstmr}}" readonly class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="nama_perusahaan" class="col-md-4 col-form-label text-md-left">Nama Perusahaan</label>
+                                    
                                                             <div class="col-md-8">
-                                                                <input id="name" type="text" value="{{$item->name}}"
-                                                                    class="form-control @error('name') is-invalid @enderror"
-                                                                    name="name" value="{{ old('name') }}" required
-                                                                    autocomplete="name" autofocus>
-
-                                                                @error('name')
+                                                                <input id="nama_perusahaan" type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror"
+                                                            name="nama_perusahaan" value="{{$item->nama_perusahaan}}" autofocus>
+                                    
+                                                                @error('nama_perusahaan')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                                 @enderror
                                                             </div>
                                                         </div>
-
+                                    
                                                         <div class="form-group row">
-                                                            <label for="email"
-                                                                class="col-md-4 col-form-label text-md-left">{{ __('E-Mail Address') }}</label>
-
-                                                            <div class="col-md-8">
-                                                                <input id="email" type="email" value="{{$item->email}}"
-                                                                    class="form-control @error('email') is-invalid @enderror"
-                                                                    name="email" value="{{ old('email') }}" required
-                                                                    autocomplete="email">
-
-                                                                @error('email')
+                                                            <label for="telepon"
+                                                                class="col-md-4 col-form-label text-md-left">Nomor Telepon</label>
+                                    
+                                                            <div class="col-md-4">
+                                                                <input id="telepon" type="tel" maxlength="13" size="13" class="form-control nomor-telepon @error('telepon') is-invalid @enderror"
+                                                            value="{{$item->telepon}}"    name="telepon">
+                                    
+                                                                @error('telepon')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                                 @enderror
                                                             </div>
                                                         </div>
-
+                                    
                                                         <div class="form-group row">
-                                                            <label for="pilihAgent"
-                                                                class="col-md-4 col-form-label text-md-left">Pilih
-                                                                Customers</label>
+                                                            <label for="alamat" class="col-md-4 col-form-label text-md-left">Alamat</label>
+                                    
                                                             <div class="col-md-8">
-                                                                <select class="form-control" id="pilihAgent" name="kd_kstmr">
-                                                                    @foreach ($customers as $customer)
-                                                                <option value="{{$customer->kd_kstmr}}">{{$customer->nama_perusahaan}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                            <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="3">{{$item->alamat}}</textarea>
                                                             </div>
                                                         </div>
-
                                                         <div class="form-group row">
-                                                            <label for="password"
-                                                                class="col-md-4 col-form-label text-md-left">{{ __('Password') }}</label>
-
+                                                            <label for="contact_person" class="col-md-4 col-form-label text-md-left">Contact Person Perusahaan</label>
+                                    
                                                             <div class="col-md-8">
-                                                                <input id="password" type="password"
-                                                                    placeholder="Password Baru.."
-                                                                    class="form-control @error('password') is-invalid @enderror"
-                                                                    name="password"
-                                                                    autocomplete="new-password">
-
-                                                                @error('password')
+                                                                <input id="contact_person" type="text" class="form-control @error('contact_person') is-invalid @enderror"
+                                                            name="contact_person" value="{{$item->contact_person}}" autofocus>
+                                    
+                                                                @error('contact_person')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                                 @enderror
                                                             </div>
                                                         </div>
-
                                                         <div class="form-group row">
-                                                            <label for="password-confirm"
-                                                                class="col-md-4 col-form-label text-md-left">{{ __('Confirm Password') }}</label>
-
-                                                            <div class="col-md-8">
-                                                                <input id="password-confirm" type="password"
-                                                                    placeholder="Ulangi Password Baru.."
-                                                                    class="form-control" name="password_confirmation"
-                                                                    autocomplete="new-password">
+                                                            <label for="handphone" class="col-md-4 col-form-label text-md-left">Nomor Telepon Contact Person</label>
+                                    
+                                                            <div class="col-md-4">
+                                                                <input id="handphone" type="tel" maxlength="13" size="13" class="form-control nomor-telepon @error('handphone') is-invalid @enderror"
+                                                                    name="handphone" value="{{$item->handphone}}" autofocus>
+                                    
+                                                                @error('handphone')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
                                                             </div>
                                                         </div>
-
                                                         <div class="form-group row mb-0">
                                                             <div class="col-md-8 offset-md-4">
-                                                                <button type="submit" class="btn btn-warning">
+                                                                <button type="submit" class="btn btn-primary">
                                                                     {{ __('Update') }}
                                                                 </button>
                                                             </div>
-                                                        </div>
+                                                        </div>                                    
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="modal fade" id="modalKonfirmasi{{$item->id}}" tabindex="-1"
+                                        <div class="modal fade" id="modalKonfirmasi{{$item->kd_kstmr}}" tabindex="-1"
                                             role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                                             <div class="modal-dialog modal-danger modal-dialog-centered modal-"
                                                 role="document">
@@ -193,13 +180,13 @@
                                                             <i class="fas fa-trash fa-3x"></i>
                                                             <h4 class="heading mt-4">Anda Yakin Menghapus User Berikut :
                                                             </h4>
-                                                            <p>{{$item->name}}</p>
+                                                            <p>{{$item->nama_perusahaan}}</p>
                                                         </div>
 
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <a href="/user/delete/{{$item->id}}"
+                                                        <a href="/home/master/customers/delete/{{$item->kd_kstmr}}"
                                                             class="btn btn-md text-danger mr-auto bg-white">Ya, Saya
                                                             Yakin!</a>
                                                         <button type="button" class="btn btn-link text-white ml-auto"
@@ -223,28 +210,38 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="create-user-baru" tabindex="-1" role="dialog" aria-labelledby="buatuserBaru"
+<div class="modal fade" id="create-customers-baru" tabindex="-1" role="dialog" aria-labelledby="buatuserBaru"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white" id="buatuserBaru">Buat User Baru</h5>
+                <h5 class="modal-title text-white" id="buatuserBaru">Buat Customers Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/home/master/user">
+                <form method="POST" action="/home/master/customers">
                     @csrf
-
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-left">{{ __('Name') }}</label>
+                        @php
+                           $kode_transaksi = "CS";
+                           $tahun = date('Y');
+                           $kodeincrement =  str_pad(++$kdsekarang,3,"0",STR_PAD_LEFT);
+                        @endphp
+                        <label for="kd_kstmr" class="col-md-4 col-form-label text-md-left">Kode Kustomers</label>
+                        <div class="col-md-4">
+                        <input type="text" name="kd_kstmr" value="{{$kode_transaksi.$tahun.$kodeincrement}}" readonly class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nama_perusahaan" class="col-md-4 col-form-label text-md-left">Nama Perusahaan</label>
 
                         <div class="col-md-8">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="nama_perusahaan" type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror"
+                                name="nama_perusahaan" autofocus>
 
-                            @error('name')
+                            @error('nama_perusahaan')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -253,14 +250,14 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="email"
-                            class="col-md-4 col-form-label text-md-left">{{ __('E-Mail Address') }}</label>
+                        <label for="telepon"
+                            class="col-md-4 col-form-label text-md-left">Nomor Telepon</label>
 
-                        <div class="col-md-8">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <div class="col-md-4">
+                            <input id="telepon" type="tel" maxlength="13" size="13" class="form-control nomor-telepon @error('telepon') is-invalid @enderror"
+                                name="telepon">
 
-                            @error('email')
+                            @error('telepon')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -269,35 +266,44 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-left">{{ __('Password') }}</label>
+                        <label for="alamat" class="col-md-4 col-form-label text-md-left">Alamat</label>
 
                         <div class="col-md-8">
-                            <input id="password" type="password"
-                                class="form-control @error('password') is-invalid @enderror" name="password" required
-                                autocomplete="new-password">
+                           <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contact_person" class="col-md-4 col-form-label text-md-left">Contact Person Perusahaan</label>
 
-                            @error('password')
+                        <div class="col-md-8">
+                            <input id="contact_person" type="text" class="form-control @error('contact_person') is-invalid @enderror"
+                                name="contact_person" autofocus>
+
+                            @error('contact_person')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group row">
-                        <label for="password-confirm"
-                            class="col-md-4 col-form-label text-md-left">{{ __('Confirm Password') }}</label>
+                        <label for="handphone" class="col-md-4 col-form-label text-md-left">Nomor Telepon Contact Person</label>
 
-                        <div class="col-md-8">
-                            <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="new-password">
+                        <div class="col-md-4">
+                            <input id="handphone" type="tel" maxlength="13" size="13" class="form-control nomor-telepon @error('handphone') is-invalid @enderror"
+                                name="handphone" autofocus>
+
+                            @error('handphone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
-
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Register') }}
+                                {{ __('Create') }}
                             </button>
                         </div>
                     </div>
