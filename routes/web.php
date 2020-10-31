@@ -13,7 +13,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/laporan', 'LaporanController@index');
 
     // master 
+    Route::match(['get', 'post'], '/user', 'MasterController@index');
     Route::match(['get', 'post'], '/home/master/user', 'MasterController@masterUser');
+    Route::get('/user/delete/{id}', 'MasterController@delete');
     
 });
 

@@ -1,0 +1,18 @@
+#buat-baru {
+    border-radius: 40px;
+    background-color: #5E72E4;
+    color: white;
+    height: 50%;
+}
+
+.text-baru {
+    color: #5E72E4;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.baru {
+    display: flex;
+    flex-direction: row;
+}
