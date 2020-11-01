@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Session;
 use App\User;
 use App\Customer;
+USE App\Barang;
 
 class MasterController extends Controller
 {
@@ -107,7 +108,24 @@ class MasterController extends Controller
         $data = Customer::where('kd_kstmr', $kd_kstmr)->first();
         $data->delete();
         return \redirect()->back()->with('sukses', 'Data Berhasil Di Hapus');
+    }
 
 
+    // Mater Barang 
+    public function masterbarangIndex(Request $create){
+        if($create->isMethod('POST')){
+            $data = $create->all();
+            return response()->json($data);
+        }
+         //$data = Customer::get();
+         $barang = Barang::orderBy('kd_barang','desc')->first();
+         $kdbarang = \substr($barang->kd_barang, -3);
+         $kdsekarang = intval($kdbarang); 
+         $databrg = Barang::get();      
+         //return response()->json($kdsekarang);
+         return view('master.barang.index', [
+             'kdsekarang' => $kdsekarang,
+             'databrg' => $databrg,
+         ]);
     }
 }

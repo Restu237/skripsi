@@ -43,7 +43,7 @@
                                     <button type="button" class="btn-icon-clipboard" data-clipboard-text="air-baloon"
                                         title="" data-original-title="Konfigurasi Barang">
                                         <div>
-                                            <a href="">
+                                            <a href="/home/master/barang">
                                                 <i class="fas fa-box"></i>
                                                 <span>Master Barang</span>
                                             </a>
