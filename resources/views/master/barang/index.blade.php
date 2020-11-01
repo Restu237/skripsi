@@ -42,22 +42,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($datakstmr as $item)
+                                    @foreach ($databrg as $item)
                                     <tr>
-                                        <td>{{$item->kd_kstmr}}</td>
-                                        <td>{{$item->nama_perusahaan}}</td>
-                                        <td>{{$item->telepon}}</td>
-                                        <td>{{$item->contact_person}}</td>  
-                                        <td>{{$item->handphone}}</td>                                       
-
+                                        <td>{{$item->kd_barang}}</td>
+                                        <td>{{$item->nama_barang}}</td>
+                                        @php
+                                            $hargaRupiah = "Rp. ".number_format($item->harga_barang,0,',','.')
+                                        @endphp
+                                        <td>{{$hargaRupiah}}</td>
+                                        @if ($item->type_barang == 0)
+                                            <td> Box </td>
+                                        @else 
+                                        <td>Pcs</td>
+                                        @endif                                    
                                         <td class="text-center">
                                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#edit{{$item->kd_kstmr}}">Edit</button><button type="button"
-                                                data-toggle="modal" data-target="#modalKonfirmasi{{$item->kd_kstmr}}"
+                                                data-target="#edit{{$item->kd_barang}}">Edit</button><button type="button"
+                                                data-toggle="modal" data-target="#modalKonfirmasi{{$item->kd_barang}}"
                                                 class="btn btn-danger btn-sm">Delete</button>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="edit{{$item->kd_kstmr}}" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="edit{{$item->kd_barang}}" tabindex="-1" role="dialog"
                                         aria-labelledby="editUser" aria-hidden="true">
                                         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -69,62 +74,40 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                <form method="POST" action="/home/master/customers/{{$item->kd_kstmr}}">
+                                                <form method="POST" action="/home/master/barang/{{$item->kd_barang}}">
                                                         @csrf
                                                         @method('PUT')
 
                                                         <div class="form-group row">
-                                                            <label for="kd_kstmr" class="col-md-4 col-form-label text-md-left">Kode Kustomers</label>
+                                                            <label for="kd_barang" class="col-md-4 col-form-label text-md-left">Kode Barang</label>
                                                             <div class="col-md-4">
-                                                            <input type="text" name="kd_kstmr" value="{{$item->kd_kstmr}}" readonly class="form-control">
+                                                            <input type="text" name="kd_barang" value="{{$item->kd_barang}}" readonly class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="nama_perusahaan" class="col-md-4 col-form-label text-md-left">Nama Perusahaan</label>
-                                    
+                                                            <label for="nama_barang" class="col-md-4 col-form-label text-md-left">Nama Produk</label>
                                                             <div class="col-md-8">
-                                                                <input id="nama_perusahaan" type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror"
-                                                            name="nama_perusahaan" value="{{$item->nama_perusahaan}}" autofocus>
+                                                                <input id="nama_barang" type="text" class="form-control @error('nama_barang') is-invalid @enderror"
+                                                            name="nama_barang" value="{{$item->nama_barang}}" autofocus>
                                     
-                                                                @error('nama_perusahaan')
+                                                                @error('nama_barang')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                                 @enderror
                                                             </div>
                                                         </div>
-                                    
                                                         <div class="form-group row">
-                                                            <label for="telepon"
-                                                                class="col-md-4 col-form-label text-md-left">Nomor Telepon</label>
-                                    
+                                                            <label for="rupiah"
+                                                                class="col-md-4 col-form-label text-md-left">Harga Barang</label>
+                                                                @php
+                                                                $hargaRupiah = "Rp. ".number_format($item->harga_barang,0,',','.')
+                                                            @endphp
                                                             <div class="col-md-4">
-                                                                <input id="telepon" type="tel" maxlength="13" size="13" class="form-control nomor-telepon @error('telepon') is-invalid @enderror"
-                                                            value="{{$item->telepon}}"    name="telepon">
+                                                            <input id="rupiah" type="text" value="{{$hargaRupiah}}" class="form-control @error('rupiah') is-invalid @enderror"
+                                                                    name="harga_barang">
                                     
-                                                                @error('telepon')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                    
-                                                        <div class="form-group row">
-                                                            <label for="alamat" class="col-md-4 col-form-label text-md-left">Alamat</label>
-                                    
-                                                            <div class="col-md-8">
-                                                            <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="3">{{$item->alamat}}</textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="contact_person" class="col-md-4 col-form-label text-md-left">Contact Person Perusahaan</label>
-                                    
-                                                            <div class="col-md-8">
-                                                                <input id="contact_person" type="text" class="form-control @error('contact_person') is-invalid @enderror"
-                                                            name="contact_person" value="{{$item->contact_person}}" autofocus>
-                                    
-                                                                @error('contact_person')
+                                                                @error('harga_barang')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -132,17 +115,21 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="handphone" class="col-md-4 col-form-label text-md-left">Nomor Telepon Contact Person</label>
-                                    
-                                                            <div class="col-md-4">
-                                                                <input id="handphone" type="tel" maxlength="13" size="13" class="form-control nomor-telepon @error('handphone') is-invalid @enderror"
-                                                                    name="handphone" value="{{$item->handphone}}" autofocus>
-                                    
-                                                                @error('handphone')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                                @enderror
+                                                            <label for="type_barang"
+                                                                class="col-md-4 col-form-label text-md-left"> Pilih Satuan Barang</label>
+                                                            <div class="col-md-2">
+                                                                <select class="form-control" id="type_barang" name="type_barang">
+                                                                    {{-- @foreach ($customers as $customer)
+                                                                <option value="{{$customer->kd_kstmr}}">{{$customer->nama_perusahaan}}</option>
+                                                                    @endforeach --}}
+                                                                    @if ($item->type_barang == 0)
+                                                                    <option selected value="0">Box</option>
+                                                                    <option value="1">Pcs</option>
+                                                                    @else
+                                                                    <option value="0">Box</option>
+                                                                    <option selected value="1">Pcs</option>
+                                                                    @endif
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row mb-0">
@@ -158,7 +145,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="modal fade" id="modalKonfirmasi{{$item->kd_kstmr}}" tabindex="-1"
+                                        <div class="modal fade" id="modalKonfirmasi{{$item->kd_barang}}" tabindex="-1"
                                             role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                                             <div class="modal-dialog modal-danger modal-dialog-centered modal-"
                                                 role="document">
@@ -177,15 +164,15 @@
 
                                                         <div class="py-3 text-center">
                                                             <i class="fas fa-trash fa-3x"></i>
-                                                            <h4 class="heading mt-4">Anda Yakin Menghapus User Berikut :
+                                                            <h4 class="heading mt-4">Anda Yakin Menghapus Barang Berikut :
                                                             </h4>
-                                                            <p>{{$item->nama_perusahaan}}</p>
+                                                            <h3 class="text-white">{{$item->nama_barang}}</h3>
                                                         </div>
 
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <a href="/home/master/customers/delete/{{$item->kd_kstmr}}"
+                                                        <a href="/home/master/barang/delete/{{$item->kd_barang}}"
                                                             class="btn btn-md text-danger mr-auto bg-white">Ya, Saya
                                                             Yakin!</a>
                                                         <button type="button" class="btn btn-link text-white ml-auto"
@@ -194,9 +181,7 @@
 
                                                 </div>
                                             </div>
-
-
-                                            @endforeach --}}
+                                            @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -228,17 +213,16 @@
                            $tahun = date('Y');
                            $kodeincrement =  str_pad(++$kdsekarang,3,"0",STR_PAD_LEFT);
                         @endphp
-                        <label for="kd_kstmr" class="col-md-4 col-form-label text-md-left">Kode Barang</label>
+                        <label for="kd_barang" class="col-md-4 col-form-label text-md-left">Kode Barang</label>
                         <div class="col-md-4">
-                        <input type="text" name="kd_kstmr" value="{{$kode_transaksi.$tahun.$kodeincrement}}" readonly class="form-control">
+                        <input type="text" name="kd_barang" value="{{$kode_transaksi.$tahun.$kodeincrement}}" readonly class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="nama_perusahaan" class="col-md-4 col-form-label text-md-left">Nama Produk</label>
-
+                        <label for="nama_barang" class="col-md-4 col-form-label text-md-left">Nama Produk</label>
                         <div class="col-md-8">
-                            <input id="nama_perusahaan" type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror"
-                                name="nama_perusahaan" autofocus>
+                            <input id="nama_barang" type="text" class="form-control @error('nama_barang') is-invalid @enderror"
+                                name="nama_barang" autofocus>
 
                             @error('nama_perusahaan')
                             <span class="invalid-feedback" role="alert">
@@ -247,16 +231,15 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group row">
-                        <label for="rupiah"
+                        <label for="rupiah1"
                             class="col-md-4 col-form-label text-md-left">Harga Barang</label>
 
                         <div class="col-md-4">
-                            <input id="rupiah" type="text"  class="form-control @error('rupiah') is-invalid @enderror"
+                            <input id="rupiah1" type="text"  class="form-control @error('rupiah1') is-invalid @enderror"
                                 name="harga_barang">
 
-                            @error('telepon')
+                            @error('rupiah1')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -264,10 +247,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="pilihAgent"
+                        <label for="type_barang"
                             class="col-md-4 col-form-label text-md-left"> Pilih Satuan Barang</label>
                         <div class="col-md-2">
-                            <select class="form-control" id="pilihAgent" name="kd_kstmr">
+                            <select class="form-control" id="type_barang" name="type_barang">
                                 {{-- @foreach ($customers as $customer)
                             <option value="{{$customer->kd_kstmr}}">{{$customer->nama_perusahaan}}</option>
                                 @endforeach --}}

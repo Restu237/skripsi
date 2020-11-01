@@ -115,7 +115,17 @@ class MasterController extends Controller
     public function masterbarangIndex(Request $create){
         if($create->isMethod('POST')){
             $data = $create->all();
-            return response()->json($data);
+            //$kode_barang = $data['harga_barang'];
+            $harga = $data['harga_barang'];
+            $hargaBarang = preg_replace("/[^0-9]/", "", $harga);
+            $databaru = new Barang;
+            $databaru->kd_barang = $data['kd_barang'];
+            $databaru->nama_barang = $data['nama_barang'];
+            $databaru->harga_barang = $hargaBarang;
+            $databaru->type_barang = $data['type_barang'];
+            $databaru->save();
+            return \redirect('/home/master/barang')->with('sukses', 'Berhasil Menambahkan Produk Baru');
+            //return response()->json($hargaBarang);
         }
          //$data = Customer::get();
          $barang = Barang::orderBy('kd_barang','desc')->first();
@@ -127,5 +137,27 @@ class MasterController extends Controller
              'kdsekarang' => $kdsekarang,
              'databrg' => $databrg,
          ]);
+    }
+
+    // update Barang 
+    public function updateBarang(Request $request, $kd_barang = null){
+        $data = $request->all();
+        //return response()->json($data);
+        $harga = $data['harga_barang'];
+        $hargaBarang = preg_replace("/[^0-9]/", "", $harga);
+        $updateData = Barang::find($kd_barang);
+        $updateData->kd_barang = $data['kd_barang'];
+        $updateData->nama_barang = $data['nama_barang'];
+        $updateData->harga_barang = $hargaBarang;
+        $updateData->type_barang = $data['type_barang'];
+        $updateData->save();
+        return \redirect('/home/master/barang')->with('sukses', 'Berhasil Meperbaharui Produk');
+    }
+
+    // Delete Barang 
+    public function deleteBarang($kd_barang){
+        $data = Barang::find($kd_barang);
+        $data->delete();
+        return \redirect('/home/master/barang')->with('sukses', 'Berhasil Menghapus Data!');
     }
 }

@@ -24,6 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/master/customers/delete/{kd_kstmr}', 'MasterController@delCustomers');
     // Master Barang
     Route::match(['get', 'post'], '/home/master/barang', 'MasterController@masterbarangIndex');
+    Route::put('/home/master/barang/{kd_barang}', 'MasterController@updateBarang');
+    Route::get('/home/master/barang/delete/{kd_barang}', 'MasterController@deleteBarang');
 
 
 });
