@@ -16,3 +16,9 @@
     display: flex;
     flex-direction: row;
 }
+
+
+.master-transaksi {
+    background-color: #F8F9FE;
+    border-radius: 20px;
+}

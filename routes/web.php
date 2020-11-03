@@ -8,6 +8,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+
+    // Master Panel
     Route::get('/home/master', 'MasterController@index' );
     Route::get('/home/transaksi', 'TransaksiController@index');
     Route::get('/home/laporan', 'LaporanController@index');
@@ -26,6 +28,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::match(['get', 'post'], '/home/master/barang', 'MasterController@masterbarangIndex');
     Route::put('/home/master/barang/{kd_barang}', 'MasterController@updateBarang');
     Route::get('/home/master/barang/delete/{kd_barang}', 'MasterController@deleteBarang');
+
+    // End Master panel
+
+    // Transaksi Panel 
+    Route::match(['get', 'post'], '/home/transaksi/so', 'SalesOrderController@index');
+
+
+
+    // End Transaksi Panel
 
 
 });
