@@ -18,6 +18,9 @@
 <link rel="stylesheet" href="{{asset('/assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('/assets/css/my.css')}}">
 
+{{-- Vuejs  --}}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
 {{-- <link rel="stylesheet" href="{{asset('/assets/vendor/datatables/css/dataTables.bootstrap.css')}}" type="text/css"> --}}
 <link rel="stylesheet" href="{{asset('/assets/vendor/datatables/css/dataTables.bootstrap4.css')}}" type="text/css">
 
@@ -37,6 +40,7 @@
 <script src="{{asset('/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/js-cookie/js.cookie.js')}}"></script>
+<script src="{{asset('assets/js/script.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables/js/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>

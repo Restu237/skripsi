@@ -16,7 +16,7 @@
                             <div class="row icon-examples">
                                 <div class="col-lg-4 col-md-6">
                                     <button type="button" class="btn-icon-clipboard" data-clipboard-text="active-40"
-                                        title="" data-original-title="Konfigurasi User">
+                                        title="" data-original-title="Buat Sales Order">
                                         <a href="/home/transaksi/so">
                                             <div>
                                                 <i class="fas fa-shopping-cart"></i>
