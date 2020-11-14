@@ -41,37 +41,35 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div id="master-transaksi" class="master-transaksi">
-                                        <div id="master-transaksi" class="master-transaksi">
+                                <div class="col-md-8">
+                               
+                                        <div id="master-transaksi">
                                             <div class="content">
                                                 <div class="master-header">
                                                     <div class="content-customer">
                                                         <div class="form-group row">
                                                         <div>
                                                         </div>
-                                                            <label style="font-size: 14px" class="col-md-5 pt-2 text-right" for="">Pilih Customer</label>
+                                                            <label  class="col-md-6 pt-2 text-right" for="">Pilih Customer</label>
                                                             <select id="customersInfo" class="customersInfo form-control form-control-sm col-md-6 mb-1 mt-2">
                                                                 <option value=0>Pilih Customer</option>
                                                                 @foreach ($customers as $customer )
                                                                 <option value={{$customer->kd_kstmr}}>{{$customer->kd_kstmr}}</option>
                                                                 @endforeach
                                                             </select>
-                                                            <label style="font-size: 14px" class="col-md-5 text-right" for="">Nama Customer</label>
+                                                            <label class="col-md-6 text-right" for="">Nama Customer</label>
                                                             <input id="nama_customer" class="form-control form-control-sm col-md-6 mb-2" value={{$customer->nama_perusahaan}} type="text"></input>
+                                                            <label class="col-md-6 text-right" for="">Alamat</label>
+                                                      
+                                                                <textarea id="alamat_customer" class="form-control col-md-6" name="" rows="4"></textarea>
+                                                                                                        
                                                             
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-4">
-                                    <div id="master-transaksi" class="master-transaksi">
-                                        Kolom untuk Master Customer
-                                    </div>
+                               
 
                                 </div>
                             </div>

@@ -20,7 +20,10 @@ $(document).ready(function () {
             success: function (response) {
                 var data = response;
                 var nama_customer = data['nama_perusahaan'];
+                var alamat = data['alamat'];
                 $('#nama_customer').val(nama_customer);
+                $('#alamat_customer').val(alamat);
+
             }
         })
     })
