@@ -27,6 +27,13 @@ $(document).ready(function () {
             }
         })
     })
+
+    $('#seachBarang').bind("keydown", function (event) {
+        if(event.which && event.keyCode == 113){
+            alert ("Tombolnya Berfungsi");
+        }
+        
+    })
 });
 
 var rupiah = document.getElementById("rupiah");

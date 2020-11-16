@@ -1,3 +1,12 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.extensionsPath": "",
+    "editor.snippetSuggestions": "top",
+    "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "vue-html": "html",
+    "plaintext": "jade"
+},
+"editor.acceptSuggestionOnCommitCharacter": true
 }
