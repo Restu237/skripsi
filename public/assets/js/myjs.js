@@ -29,11 +29,54 @@ $(document).ready(function () {
     })
 
     $('#seachBarang').bind("keydown", function (event) {
-        if(event.which && event.keyCode == 113){
-            alert ("Tombolnya Berfungsi");
+        if (event.which && event.keyCode == 113) {
+            $('#modalcreate').modal('show')
         }
-        
+
     })
+
+    $('#searchProduct').DataTable();
+
+    // get value 
+    $('#searchProduct').on('click', '#btnAdd', function () {
+        // getCurront RoW dATA 
+        var currentRow = $(this).closest("tr");
+        var kd_barang = currentRow.find("#kode-barang").html();
+        $.ajax({
+            url: '/barang/' + kd_barang,
+            type: 'get',
+            dataType: 'json',
+            success: function (response) {
+                // menjadi respon menjadi 1 variable 
+                var data = response;
+                var kode_barang = data['kd_barang'];
+                var nama_barang = data['nama_barang'];
+                var harga_barang = data['harga_barang'];
+                var bilangan = harga_barang;
+                var reverse = bilangan.toString().split('').reverse().join(''),
+                    ribuan = reverse.match(/\d{1,3}/g);
+                    ribuan = ribuan.join('.').split('').reverse().join('');
+
+
+                //alert(nama_barang);
+                var count = 0;
+                count++;
+                var html = '';
+                html += "<tr>";
+                html += "<td> <input type='text' id='nama_barang' name='barang_so[]' class='form-control' value='" + kode_barang + "'> </td>";
+                html += "<td> <input type='text' name='barang_so[]' class='form-control' value='" + nama_barang + "'> </td>";
+                html += "<td> <input type='text' name='barang_so[]' class='form-control' value='Rp. " + ribuan + "'> </td>";
+                html += "<td> <input type='number' name='barang_so[]' class='form-control'> </td>";
+                html += '<td><button type="button" name="remove" class="btn btn-danger btn-xs remove"><i class="fas fa-trash text-white"></i></button></td>';
+                $('#transaksi tbody').append(html);
+            }
+            
+        })
+        $('#searchModal').modal('toggle');
+    })
+    $(document).on('click', '.remove', function(){
+        $(this).closest('tr').remove();
+      });
 });
 
 var rupiah = document.getElementById("rupiah");
@@ -84,5 +127,3 @@ function formatRupiah(angka, prefix) {
     rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
     return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
 }
-
-

@@ -21,11 +21,13 @@ class SalesOrderController extends Controller
             $kodeso = \substr($so['kd_so'], -3);
             $kode = intval($kodeso); 
         }
+        $barangs = Barang::get();
 
         $customers = Customer::get();
         return \view('transaksi.so.index', [
             'kode' => $kode,
-            'customers' => $customers
+            'customers' => $customers,
+            'barangs' => $barangs
         ]);
     }
 
@@ -34,5 +36,10 @@ class SalesOrderController extends Controller
         // dd($customersDetail);
         // die;
         return \response(\json_encode(\json_decode($customersDetail)));
+    }
+
+    public function barangInfo($kd_barang){
+        $barangDetail = Barang::find($kd_barang);
+        return \response(\json_encode(\json_decode($barangDetail)));
     }
 }

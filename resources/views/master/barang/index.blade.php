@@ -103,10 +103,12 @@
                                                                 @php
                                                                 $hargaRupiah = "Rp. ".number_format($item->harga_barang,0,',','.')
                                                             @endphp
+                                                            
+
                                                             <div class="col-md-4">
                                                             <input id="rupiah" type="text" value="{{$hargaRupiah}}" class="form-control @error('rupiah') is-invalid @enderror"
                                                                     name="harga_barang">
-                                    
+
                                                                 @error('harga_barang')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>

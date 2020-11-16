@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::match(['get', 'post'], '/home/master/barang', 'MasterController@masterbarangIndex');
     Route::put('/home/master/barang/{kd_barang}', 'MasterController@updateBarang');
     Route::get('/home/master/barang/delete/{kd_barang}', 'MasterController@deleteBarang');
+    Route::get('/barang/{kd_barang}', 'SalesOrderController@barangInfo');
 
     // End Master panel
 
