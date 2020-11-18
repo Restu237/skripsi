@@ -92,15 +92,33 @@
                                                     <th scope="col">Harga</th>
                                                     <th scope="col">Qty</th>
                                                     <th scope="col">Action</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-md-4 bg-cyan">
-                                      <h5>Amount Section</h5>
+                                    <div class="col-md-4">
+                                        <div id="kalkulasi" class="card">
+                                            <div class="card-header" id="kalkulasi">
+                                                <b class="judul-card">Kalkulasi</b>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="dol-md-6"><h3>Jumlah Item :</h3></div>
+                                                    <div class="dol-md-6 pl-2"> <h3><b id="jumlahItem">  </b> </h3></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="dol-md-6"><h3>Jumlah Qty :</h3></div>
+                                                    <div class="dol-md-6 pl-2"> <h3><b id="totalQty"></b> </h3></div>
+                                                    <div class="dol-md-6 pl-2"> <h3><b id="totalQty1"></b> </h3></div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-md"> 
+                                             <i class="fas fa-plus"></i> Create SO
+                                        </button>
                                     </div>
                                 </div>
                             </div>

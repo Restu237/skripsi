@@ -1,9 +1,6 @@
 $(document).ready(function () {
     $("#user_master").DataTable();
     $(".nomor-telepon").bind("input", function () {
-        //   $(this).val(function(_, v){
-        //    return v.replace(/\s+/g, '');
-        //   });
         if (isNaN($(this).val())) {
             $(this).val(0);
         }
@@ -12,7 +9,6 @@ $(document).ready(function () {
 
     $('.customersInfo').change(function () {
         var kd_kstmr = $(this).val();
-        // console.log(kd_kstmr);
         $.ajax({
             url: '/customers/' + kd_kstmr,
             type: 'get',
@@ -55,7 +51,7 @@ $(document).ready(function () {
                 var bilangan = harga_barang;
                 var reverse = bilangan.toString().split('').reverse().join(''),
                     ribuan = reverse.match(/\d{1,3}/g);
-                    ribuan = ribuan.join('.').split('').reverse().join('');
+                ribuan = ribuan.join('.').split('').reverse().join('');
 
 
                 //alert(nama_barang);
@@ -63,20 +59,40 @@ $(document).ready(function () {
                 count++;
                 var html = '';
                 html += "<tr>";
-                html += "<td> <input type='text' id='nama_barang' name='barang_so[]' class='form-control' value='" + kode_barang + "'> </td>";
-                html += "<td> <input type='text' name='barang_so[]' class='form-control' value='" + nama_barang + "'> </td>";
-                html += "<td> <input type='text' name='barang_so[]' class='form-control' value='Rp. " + ribuan + "'> </td>";
-                html += "<td> <input type='number' name='barang_so[]' class='form-control'> </td>";
+                html += "<td> <input type='text' readonly id='nama_barang' name='barang_so[]' class='form-control' value='" + kode_barang + "'> </td>";
+                html += "<td> <input type='text' readonly name='barang_so[]' class='form-control' value='" + nama_barang + "'> </td>";
+                html += "<td> <input type='text' readonly name='barang_so[]' class='form-control' value='Rp. " + ribuan + "'> </td>";
+                html += "<td> <input id='jumlahQty' type='number' name='barang_so[]' class='form-control jumlahQty'> </td>";
                 html += '<td><button type="button" name="remove" class="btn btn-danger btn-xs remove"><i class="fas fa-trash text-white"></i></button></td>';
                 $('#transaksi tbody').append(html);
+
+                var transaksiRow = $('#transaksi tr').length;
+                var jumlahItem = transaksiRow - 1;
+                $('#jumlahItem').text(jumlahItem);
             }
-            
         })
         $('#searchModal').modal('toggle');
     })
-    $(document).on('click', '.remove', function(){
+    $(document).on('click', '.remove', function () {
         $(this).closest('tr').remove();
-      });
+        var sum = 0;
+        $('.jumlahQty').each(function () {
+            sum += Number($(this).val());
+        });
+
+
+        $('#totalQty').html(sum);
+    });
+
+
+    $(document).on('change', '#jumlahQty', function () {
+        var jumlahQty = $(this).val();
+        var sum = 0;
+        $('.jumlahQty').each(function () {
+            sum += Number($(this).val());
+        });
+        $('#totalQty').html(sum);
+    }).keyup();
 });
 
 var rupiah = document.getElementById("rupiah");
