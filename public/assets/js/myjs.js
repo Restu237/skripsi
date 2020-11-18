@@ -52,17 +52,15 @@ $(document).ready(function () {
                 var reverse = bilangan.toString().split('').reverse().join(''),
                     ribuan = reverse.match(/\d{1,3}/g);
                 ribuan = ribuan.join('.').split('').reverse().join('');
-
-
                 //alert(nama_barang);
                 var count = 0;
                 count++;
                 var html = '';
                 html += "<tr>";
-                html += "<td> <input type='text' readonly id='nama_barang' name='barang_so[]' class='form-control' value='" + kode_barang + "'> </td>";
-                html += "<td> <input type='text' readonly name='barang_so[]' class='form-control' value='" + nama_barang + "'> </td>";
-                html += "<td> <input type='text' readonly name='barang_so[]' class='form-control' value='Rp. " + ribuan + "'> </td>";
-                html += "<td> <input id='jumlahQty' type='number' name='barang_so[]' class='form-control jumlahQty'> </td>";
+                html += "<td> <input type='text' readonly id='nama_barang' name='kd_barang[]' class='form-control' value='" + kode_barang + "'> </td>";
+                html += "<td> <input type='text' readonly class='form-control' value='" + nama_barang + "'> </td>";
+                html += "<td> <input type='text' readonly class='form-control' value='Rp. " + ribuan + "'> </td>";
+                html += "<td> <input id='jumlahQty' min='1' type='number' name='jumlah_qty' class='form-control jumlahQty'> </td>";
                 html += '<td><button type="button" name="remove" class="btn btn-danger btn-xs remove"><i class="fas fa-trash text-white"></i></button></td>';
                 $('#transaksi tbody').append(html);
 
@@ -79,14 +77,15 @@ $(document).ready(function () {
         $('.jumlahQty').each(function () {
             sum += Number($(this).val());
         });
-
-
         $('#totalQty').html(sum);
     });
 
 
     $(document).on('change', '#jumlahQty', function () {
         var jumlahQty = $(this).val();
+        if(jumlahQty < 0){
+            jumlahQty = 0
+        }
         var sum = 0;
         $('.jumlahQty').each(function () {
             sum += Number($(this).val());

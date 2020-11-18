@@ -11,4 +11,9 @@ class SalesOrder extends Model
 
     // Guarded table
     protected $guarded = [];
+
+    // relations
+    public function transaksi_so(){
+        return $this->hasMany('App\so_transaksi');
+    }
 }

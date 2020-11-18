@@ -11,10 +11,12 @@
                     <div class="card">
                         <div class="card-header bg-transparent">
                             <h2 class="mb-0 text-center"><b>Sales Order</b></h2>
+                            <button class="btn btn-md btn-info">List Transaksi SO</button>
                         </div>
+                        <form id="formso" action="{{url('so/create')}}" method="POST">
+                        @csrf
                         <div class="card-body">
                             <div class="row">
-
                                 <div class="col-md-4">
                                     <div id="master-transaksi" class="master-transaksi">
                                         @php
@@ -42,7 +44,6 @@
                                 </div>
 
                                 <div class="col-md-8">
-
                                     <div id="master-transaksi">
                                         <div class="content">
                                             <div class="master-header">
@@ -52,7 +53,7 @@
                                                         </div>
                                                         <label class="col-md-4 pt-2 text-right" for="">Pilih
                                                             Customer</label>
-                                                        <select id="customersInfo"
+                                                        <select name="kd_kstmr" id="customersInfo"
                                                             class="customersInfo form-control form-control-sm col-md-8 mb-1 mt-2">
                                                             <option value=0>Pilih Customer</option>
                                                             @foreach ($customers as $customer )
@@ -95,6 +96,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <form action="#" method="post">
+
+                                                </form>
                                             </tbody>
                                         </table>
                                     </div>
@@ -124,6 +128,7 @@
                             </div>
                         </div>
                     </div>
+                 </form>
                 </div>
             </div>
         </div>

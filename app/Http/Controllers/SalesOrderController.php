@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\SalesOrder;
 USE App\Barang;
 use App\Customer;
-
+use App\so_transaksi;
+use DB;
 
 class SalesOrderController extends Controller
 {
@@ -41,5 +42,31 @@ class SalesOrderController extends Controller
     public function barangInfo($kd_barang){
         $barangDetail = Barang::find($kd_barang);
         return \response(\json_encode(\json_decode($barangDetail)));
+    }
+
+    public function create(Request $request){
+        $data = $request->all();
+        // dd($data);
+        // die;
+        $create = new SalesOrder();
+        $create->kd_so = $data['kd_so'];
+        $create->kd_kstmr = $data['kd_kstmr'];
+        $create->tanggal = $data['tanggal'];
+        $create->save();
+
+
+        // dataset 
+        $kode_barang1 = [];
+        foreach($request->get('kd_barang') as $kode_barang){
+            $kode_barang1[] =[
+                'kd_so' => $data['kd_so'],
+                'kd_kstmr' => $data['kd_kstmr'],
+                'kd_barang' => $kode_barang,
+                'jumlah_qty' => $data['jumlah_qty'],
+            ];
+        }
+        DB::table('so_transaksi')->insert($kode_barang1);
+        // so_transaksi::insert([$kode_barang1]);
+        // dd($kode_barang1);
     }
 }
