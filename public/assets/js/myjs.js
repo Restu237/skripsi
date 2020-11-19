@@ -89,7 +89,9 @@ $(document).ready(function () {
         });
         $("#totalQty").html(sum);
     });
-
+    var transaksiRow = $("#transaksi tr").length;
+    var jumlahItem = transaksiRow - 1;
+    $("#jumlahItem").text(jumlahItem);
     $(document)
         .on("change", "#jumlahQty", function () {
             var jumlahQty = $(this).val();

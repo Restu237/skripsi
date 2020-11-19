@@ -36,8 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Transaksi Panel 
     Route::match(['get', 'post'], '/home/transaksi/so', 'SalesOrderController@index');
     Route::post('so/create', 'SalesOrderController@create');
-
-
+    Route::match(['get', 'put'], '/home/transaksi/so/{kd_so}', 'SalesOrderController@update');
 
     // End Transaksi Panel
 

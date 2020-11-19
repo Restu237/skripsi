@@ -74,4 +74,16 @@ class SalesOrderController extends Controller
         // dd($kode_barang1);
         return redirect()->back()->with('sukses', 'Berhasil Membuat Sales Order Baru!');
     }
+
+    public function update(Request $update, $kd_so = null){
+        $update = SalesOrder::find($kd_so);
+        $barangs = Barang::get();
+
+        $transaksi = so_transaksi::where('kd_so', $kd_so)->get();
+        return view('transaksi.so.update',[
+            'update' => $update,
+            'barangs' => $barangs,
+            'transaksi' => $transaksi
+        ]);
+    }
 }

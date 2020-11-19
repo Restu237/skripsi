@@ -11,6 +11,10 @@ class SalesOrder extends Model
 
     // Guarded table
     protected $guarded = [];
+    protected $primaryKey = 'kd_so';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
 
     // relations
     public function transaksi_so(){
