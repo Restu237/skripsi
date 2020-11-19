@@ -12,4 +12,13 @@ class Customer extends Model
     public $incrementing = false;
 
     protected $guarded = [];
+
+    // relasi 
+    public function salesorder(){
+        return $this->hasMany('App/SalesOrder', 'kd_so');
+    }
+
+    // public function salesorder(){
+    //     return $this->belongsTo('App/SalesOrder');
+    // }
 }

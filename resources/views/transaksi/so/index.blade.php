@@ -8,10 +8,22 @@
         <div class="container-fluid mt--6">
             <div class="row justify-content-center">
                 <div class=" col ">
+                    @if (Session::has('sukses'))
+                    <div class="pesan m-4">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <span class="alert-icon"><i class="fas fa-check""></i></span>
+                            <span class=" alert-text">{!! Session::get('sukses') !!}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    @endif
                     <div class="card">
                         <div class="card-header bg-transparent">
                             <h2 class="mb-0 text-center"><b>Sales Order</b></h2>
-                            <button class="btn btn-md btn-info">List Transaksi SO</button>
+                            <button class="btn btn-md btn-info" data-toggle="modal"
+                            data-target="#list-transaksi">List Transaksi SO</button>
                         </div>
                         <form id="formso" action="{{url('so/create')}}" method="POST">
                         @csrf
@@ -135,7 +147,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Barang -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="#modalSearch" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -172,6 +184,47 @@
                             @endif
                             <td><button id="btnAdd" class="btn btn-sm btn-circle"><i
                                         class="fas fa-plus text-primary"></i>Add</button></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Modal So --}}
+<div class="modal fade" id="list-transaksi" tabindex="-1" role="dialog" aria-labelledby="#modalTransaksi" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTransaksi">Search Transkasi Sales Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="searchTransaksiSO" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Kode SO</th>
+                            <th>Kode Kustomer</th>
+                            <th>Nama Kustomer</th>
+                            <th>Tanggal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($transaksiSo as $transaksi)
+                        <tr>
+                            <td id="kode-so">{{$transaksi->kd_so}}</td>
+                            <td>{{$transaksi->kd_kstmr}}</td>
+                            <td>{{$transaksi->customer->nama_perusahaan}}</td>
+                            <td>{{$transaksi->tanggal}}</td>                          
+                            <td><a class="btn btn-sm btn-circle" href="/home/transaksi/so/{{$transaksi->kd_so}}"><i
+                                class="fas fa-eye text-primary"></i>Detial</a></td>
                         </tr>
                         @endforeach
                     </tbody>

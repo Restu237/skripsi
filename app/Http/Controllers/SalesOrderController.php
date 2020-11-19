@@ -9,6 +9,8 @@ USE App\Barang;
 use App\Customer;
 use App\so_transaksi;
 use DB;
+use Session;
+
 
 class SalesOrderController extends Controller
 {
@@ -23,12 +25,14 @@ class SalesOrderController extends Controller
             $kode = intval($kodeso); 
         }
         $barangs = Barang::get();
-
+        $transaksiSo = SalesOrder::all();
+        
         $customers = Customer::get();
         return \view('transaksi.so.index', [
             'kode' => $kode,
             'customers' => $customers,
-            'barangs' => $barangs
+            'barangs' => $barangs,
+            'transaksiSo' => $transaksiSo,
         ]);
     }
 
@@ -68,5 +72,6 @@ class SalesOrderController extends Controller
         DB::table('so_transaksi')->insert($kode_barang1);
         // so_transaksi::insert([$kode_barang1]);
         // dd($kode_barang1);
+        return redirect()->back()->with('sukses', 'Berhasil Membuat Sales Order Baru!');
     }
 }
