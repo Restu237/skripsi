@@ -18,6 +18,7 @@ class CreateSoTransaksisTable extends Migration
             $table->string('kd_so', 9);
             $table->string('kd_barang', 9);
             $table->string('kd_kstmr', 9);
+            $table->date('tanggal');
             $table->integer('jumlah_qty');
             $table->foreign('kd_kstmr')->references('kd_kstmr')->on('customers')->onDelete('cascade');
             $table->foreign('kd_so')->references('kd_so')->on('sales_order')->onDelete('cascade');
