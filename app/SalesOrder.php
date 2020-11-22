@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SalesOrder extends Model
 {
-    //deklare table 
+    //deklare table
     protected $table = "sales_order";
 
     // Guarded table
@@ -17,8 +17,8 @@ class SalesOrder extends Model
 
 
     // relations
-    public function transaksi_so(){
-        return $this->hasMany('App\so_transaksi');
+    public function transaksiso(){
+        return $this->hasMany('App\so_transaksi', 'id');
     }
 
     // public function customer(){

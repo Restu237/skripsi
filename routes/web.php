@@ -14,7 +14,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/transaksi', 'TransaksiController@index');
     Route::get('/home/laporan', 'LaporanController@index');
 
-    // master 
+    // master
     Route::match(['get', 'post'], '/user', 'MasterController@index');
     // Master User
     Route::match(['get', 'post'], '/home/master/user', 'MasterController@masterUser');
@@ -33,10 +33,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // End Master panel
 
-    // Transaksi Panel 
+    // Transaksi Panel
     Route::match(['get', 'post'], '/home/transaksi/so', 'SalesOrderController@index');
     Route::post('so/create', 'SalesOrderController@create');
     Route::match(['get', 'put'], '/home/transaksi/so/{kd_so}', 'SalesOrderController@update');
+    Route::get('/home/transaksi/so/delete/{kd_so}', 'SalesOrderController@delete');
 
     // End Transaksi Panel
 

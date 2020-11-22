@@ -52,9 +52,9 @@
                                         <td>{{$hargaRupiah}}</td>
                                         @if ($item->type_barang == 0)
                                             <td> Box </td>
-                                        @else 
+                                        @else
                                         <td>Pcs</td>
-                                        @endif                                    
+                                        @endif
                                         <td class="text-center">
                                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                 data-target="#edit{{$item->kd_barang}}">Edit</button><button type="button"
@@ -89,7 +89,7 @@
                                                             <div class="col-md-8">
                                                                 <input id="nama_barang" type="text" class="form-control @error('nama_barang') is-invalid @enderror"
                                                             name="nama_barang" value="{{$item->nama_barang}}" autofocus>
-                                    
+
                                                                 @error('nama_barang')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -103,7 +103,7 @@
                                                                 @php
                                                                 $hargaRupiah = "Rp. ".number_format($item->harga_barang,0,',','.')
                                                             @endphp
-                                                            
+
 
                                                             <div class="col-md-4">
                                                             <input id="rupiah" type="text" value="{{$hargaRupiah}}" class="form-control @error('rupiah') is-invalid @enderror"
@@ -140,7 +140,7 @@
                                                                     {{ __('Update') }}
                                                                 </button>
                                                             </div>
-                                                        </div>                                    
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>

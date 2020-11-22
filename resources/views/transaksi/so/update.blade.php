@@ -23,9 +23,7 @@
                         <div class="card-header bg-transparent">
                             <h2 class="mb-0 text-center"><b>Sales Order Edit Transaksi</b></h2>
                         </div>
-                        <form id="formso" action="{{url('/home/so/edit/')}}" method="POST">
-                            @method('PUT')
-                        @csrf
+
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
@@ -83,10 +81,10 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#searchModal">
                                                 <div class="fas fa-search"></div> Cari Barang
-                                            </button>
+                                            </button> --}}
                                         </div>
                                         <table id="transaksi" class="table table-hover pt-2">
                                             <thead>
@@ -98,14 +96,19 @@
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
+                                            <form id="formso" action="{{url('/home/transaksi/so',$update->kd_so)}}" method="POST">
+                                                @method('PUT')
+                                            @csrf
                                             <tbody>
                                                @foreach ($transaksi as $item)
                                                <tr>
-                                               <input type="hidden" value="$item->id">
+                                               <input name="id[]" type="hidden" value="{{$item->id}}">
+                                               <input name="kd_kstmr[]" type="hidden" value="{{$item->kd_kstmr}}">
+
                                                 <td> <input type='text' readonly id='nama_barang' name='kd_barang[]' class='form-control' value="{{$item->kd_barang}}"> </td>
                                                 <td> <input type='text' readonly class='form-control' value="Nama Barang"> </td>
                                                 <td> <input type='text' readonly class='form-control' value="Harga Barang"> </td>
-                                                <td> <input id='jumlahQty' min='1' type='number' value="{{$item->jumlah_qty}}" name='jumlah_qty' class='form-control jumlahQty'> </td>
+                                                <td> <input id='jumlahQty' min='1' type='number' value="{{$item->jumlah_qty}}" name='jumlah_qty[]' class='form-control jumlahQty'> </td>
                                                 <td><button type="button" name="remove" class="btn btn-danger btn-xs remove"><i class="fas fa-trash text-white"></i></button></td>
                                             </tr>
                                                 @endforeach
@@ -130,10 +133,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-warning btn-md"> 
+                                        <button type="submit" class="btn btn-warning btn-md">
                                              <i class="fas fa-plus"></i> Update SO
                                         </button>
-                                        <a href="#" class="btn btn-md btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
+                                    <a href="/home/transaksi/so/delete/{{$update->kd_so}}" class="btn btn-md btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
                                     </div>
                                 </div>
                             </div>

@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class so_transaksi extends Model
 {
-    //deklare table 
+    //deklare table
     protected $table = 'so_transaksi';
 
     protected $guarded = [];
 
-    public function so_transaksi(){
-        return $this->belongsTo('App\SalesOrder');
+    protected $primaryKey = 'id';
+
+    public function salesorder(){
+        return $this->belongsTo('App\SalesOrder', 'kd_so');
     }
 }

@@ -14,7 +14,7 @@ use Session;
 
 class SalesOrderController extends Controller
 {
-    // public function 
+    // public function
     public function index(){
         $kdsekarang = Barang::get()->count();
         if($kdsekarang <= 0){
@@ -22,11 +22,11 @@ class SalesOrderController extends Controller
         }else{
             $so = SalesOrder::orderBy('kd_so', 'desc')->first();
             $kodeso = \substr($so['kd_so'], -3);
-            $kode = intval($kodeso); 
+            $kode = intval($kodeso);
         }
         $barangs = Barang::get();
         $transaksiSo = SalesOrder::all();
-        
+
         $customers = Customer::get();
         return \view('transaksi.so.index', [
             'kode' => $kode,
@@ -59,7 +59,7 @@ class SalesOrderController extends Controller
         $create->save();
 
 
-        // dataset 
+        // dataset
         $kode_barang1 = [];
         foreach($request->get('kd_barang') as $kode_barang){
             $kode_barang1[] =[
@@ -76,14 +76,41 @@ class SalesOrderController extends Controller
     }
 
     public function update(Request $update, $kd_so = null){
+        if($update->isMethod('PUT')){
+            $data = $update->all();
+            $transaksi = so_transaksi::where('kd_so', $kd_so)->get();
+            for ($i=0; $i<count($update->id); $i++){
+                DB::table('so_transaksi')->where('id', $update->id[$i])->update([
+                    // 'kd_so' => $update->kd_so[$i],
+                    // 'kd_kstmr' => $update->kd_kstmr[$i],
+                    'kd_barang' => $update->kd_barang[$i],
+                    'jumlah_qty' => $update->jumlah_qty[$i],
+                ]);
+            }
+        return redirect()->back()->with('sukses', 'Berhasil Membuat Edit SO!');
+    }
+
+
         $update = SalesOrder::find($kd_so);
         $barangs = Barang::get();
-
         $transaksi = so_transaksi::where('kd_so', $kd_so)->get();
+        //dd($idTransaksi);
         return view('transaksi.so.update',[
             'update' => $update,
             'barangs' => $barangs,
             'transaksi' => $transaksi
         ]);
+    }
+
+    public function editTrksi(Request $update, $id = null){
+        $data = $update->all();
+        return response()->json($data);
+    }
+
+    public function delete($kd_so){
+        $delete = SalesOrder::find($kd_so);
+        $delete->transaksiso()->delete();
+        $delete->delete();
+        return redirect('/home/transaksi/so')->with('sukses', 'Berhasil Menghapus SO!');
     }
 }
