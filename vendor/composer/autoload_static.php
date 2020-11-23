@@ -418,6 +418,7 @@ class ComposerStaticInit63e0641e07d3f2d179cdac4895b71a7c
         'App\\Barang' => __DIR__ . '/../..' . '/app/Barang.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Customer' => __DIR__ . '/../..' . '/app/Customer.php',
+        'App\\DelveryOrder' => __DIR__ . '/../..' . '/app/DelveryOrder.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
