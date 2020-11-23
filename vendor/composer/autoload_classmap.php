@@ -39,6 +39,7 @@ return array(
     'App\\SalesOrder' => $baseDir . '/app/SalesOrder.php',
     'App\\SuratJalan' => $baseDir . '/app/SuratJalan.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\do_transaksi' => $baseDir . '/app/do_transaksi.php',
     'App\\so_transaksi' => $baseDir . '/app/so_transaksi.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
     'AssertionError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',

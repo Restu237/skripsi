@@ -448,6 +448,7 @@ class ComposerStaticInit63e0641e07d3f2d179cdac4895b71a7c
         'App\\SalesOrder' => __DIR__ . '/../..' . '/app/SalesOrder.php',
         'App\\SuratJalan' => __DIR__ . '/../..' . '/app/SuratJalan.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\do_transaksi' => __DIR__ . '/../..' . '/app/do_transaksi.php',
         'App\\so_transaksi' => __DIR__ . '/../..' . '/app/so_transaksi.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
