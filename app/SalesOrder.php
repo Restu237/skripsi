@@ -16,15 +16,17 @@ class SalesOrder extends Model
     protected $keyType = 'string';
 
 
-    // relations
+    // relations with so transaksi
     public function transaksiso(){
         return $this->hasMany('App\so_transaksi', 'id');
     }
-
-    // public function customer(){
-    //     return $this->hasOne('App\Customer');
-    // }
+    // relations with customer
     public function customer(){
         return $this->belongsTo('App\Customer', 'kd_kstmr');
+    }
+
+    // relations with do
+    public function delveryorder(){
+        return $this->hasOne('App\DelveryOrder', 'kd_do');
     }
 }

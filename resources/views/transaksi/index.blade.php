@@ -23,7 +23,7 @@
                                                 <span>Sales Order</span>
                                             </div>
                                         </a>
-                                       
+
                                     </button>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
@@ -37,16 +37,16 @@
                                         </div>
                                     </button>
                                 </div>
-                            
+
                                 <div class="col-lg-4 col-md-6">
                                     <button type="button" class="btn-icon-clipboard" data-clipboard-text="air-baloon"
                                         title="" data-original-title="Konfigurasi Barang">
                                         <div>
-                                            <a href="/home/master/do">
+                                            <a href="/home/transaksi/do">
                                                 <i class="fas fa-car"></i>
                                                 <span>DO / Surat Jalan</span>
                                             </a>
-                                           
+
                                         </div>
                                     </button>
                                 </div>
@@ -56,6 +56,6 @@
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
 </div>
 @endsection

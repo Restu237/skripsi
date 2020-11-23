@@ -6,6 +6,25 @@ $(document).ready(function () {
         }
         $(this).val($(this).val().replace(/ +?/g, ""));
     });
+    // so form
+    $(".soInfo").change(function () {
+        var kd_so = $(this).val();
+        $.ajax({
+            url: "/do/so-info/" + kd_so,
+            type: "get",
+            dataType: "json",
+            success: function (response) {
+                var data = response;
+                var nama_customer = data.customer["nama_perusahaan"];
+                var alamat_customer = data.customer["alamat"];
+                $("#nama_customer").val(nama_customer);
+                $("#alamat_customer").val(alamat_customer);
+                //console.log(data.customer["nama_perusahaan"]);
+            },
+        });
+    });
+
+    // do form
 
     $(".customersInfo").change(function () {
         var kd_kstmr = $(this).val();

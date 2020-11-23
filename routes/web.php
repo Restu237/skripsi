@@ -34,12 +34,17 @@ Route::group(['middleware' => ['auth']], function () {
     // End Master panel
 
     // Transaksi Panel
+    // transaksi so
     Route::match(['get', 'post'], '/home/transaksi/so', 'SalesOrderController@index');
     Route::post('so/create', 'SalesOrderController@create');
     Route::match(['get', 'put'], '/home/transaksi/so/{kd_so}', 'SalesOrderController@update');
     Route::get('/home/transaksi/so/delete/{kd_so}', 'SalesOrderController@delete');
 
+    // transaksi do
+    Route::match(['get', 'post'], '/home/transaksi/do', 'DeliveryOrderController@index');
+    Route::get('/do/so-info/{kd_so}', 'DeliveryOrderController@sodata');
     // End Transaksi Panel
+
 
 
 });
