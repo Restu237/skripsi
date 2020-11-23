@@ -9,6 +9,7 @@ $(document).ready(function () {
     // so form
     $(".soInfo").change(function () {
         var kd_so = $(this).val();
+        $("#transaksi td").remove();
         $.ajax({
             url: "/do/so-info/" + kd_so,
             type: "get",
@@ -24,6 +25,49 @@ $(document).ready(function () {
         });
     });
 
+    // get data so transaksi
+    $("#soInfo").change(function () {
+        var kd_so = $(this).val();
+        $.ajax({
+            url: "/do/so-info-tr/" + kd_so,
+            type: "get",
+            dataType: "json",
+            success: function (response) {
+                //console.log(response);
+                var dataTabel = "";
+                $.each(response, function (index, row) {
+                    //console.log(row.barang.nama_barang);
+                    dataTabel += "<tr>";
+                    dataTabel +=
+                        "<td> <input type='text' readonly id='nama_barang' name='kd_barang[]' class='form-control' value='" +
+                        row.kd_barang +
+                        "'> </td>";
+                    dataTabel +=
+                        "<td> <input type='text' readonly class='form-control' value='" +
+                        row.barang.nama_barang +
+                        "'> </td>";
+                    dataTabel +=
+                        "<td> <input type='text' readonly class='form-control' value='Rp. " +
+                        row.barang.harga_barang +
+                        "'> </td>";
+                    dataTabel +=
+                        "<td> <input id='jumlahQty' min='1' value='" +
+                        row.jumlah_qty +
+                        "' type='number' name='jumlah_qty' class='form-control jumlahQty'> </td>";
+                });
+                $("#transaksi tbody").append(dataTabel);
+                var transaksiRow = $("#transaksi tr").length;
+                var jumlahItem = transaksiRow - 1;
+                $("#jumlahItem").text(jumlahItem);
+                $(this).closest("tr").remove();
+                var sum = 0;
+                $(".jumlahQty").each(function () {
+                    sum += Number($(this).val());
+                });
+                $("#totalQty").html(sum);
+            },
+        });
+    });
     // do form
 
     $(".customersInfo").change(function () {

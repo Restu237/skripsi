@@ -99,12 +99,12 @@
                             <div class="section-barang">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#searchModal">
                                                 <div class="fas fa-search"></div> Cari Barang
                                             </button>
-                                        </div>
+                                        </div> --}}
                                         <table id="transaksi" class="table table-hover pt-2">
                                             <thead>
                                                 <tr>
@@ -112,7 +112,6 @@
                                                     <th scope="col">Nama Barang</th>
                                                     <th scope="col">Harga</th>
                                                     <th scope="col">Qty</th>
-                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -155,54 +154,6 @@
     </div>
 </div>
 
-<!-- Modal Barang -->
-<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="#modalSearch" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalSearch">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table id="searchProduct" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Harga Barang</th>
-                            <th>Satuan</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach($barangs as $barang)
-                        <tr>
-                            <td id="kode-barang">{{$barang->kd_barang}}</td>
-                            <td>{{$barang->nama_barang}}</td>
-                            @php
-                            $hargaRupiah = "Rp. ".number_format($barang->harga_barang,0,',','.')
-                            @endphp
-                            <td>{{$hargaRupiah}}</td>
-                            @if ($barang->type_barang == 0)
-                            <td> Box </td>
-                            @else
-                            <td>Pcs</td>
-                            @endif
-                            <td><button id="btnAdd" class="btn btn-sm btn-circle"><i
-                                        class="fas fa-plus text-primary"></i>Add</button></td>
-                        </tr>
-                        @endforeach --}}
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 {{-- Modal So --}}
 <div class="modal fade" id="list-transaksi" tabindex="-1" role="dialog" aria-labelledby="#modalTransaksi" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

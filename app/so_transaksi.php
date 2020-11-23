@@ -16,4 +16,8 @@ class so_transaksi extends Model
     public function salesorder(){
         return $this->belongsTo('App\SalesOrder', 'kd_so');
     }
+
+    public function barang(){
+        return $this->belongsTo('App\Barang', 'kd_barang');
+    }
 }
