@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    // deklare table 
+    // deklare table
     protected $primaryKey = 'kd_kstmr';
     protected $table = 'customers';
     public $incrementing = false;
 
     protected $guarded = [];
 
-    // relasi 
+    // relasi
     public function salesorder(){
         return $this->hasMany('App/SalesOrder', 'kd_so');
     }
@@ -21,4 +21,8 @@ class Customer extends Model
     // public function salesorder(){
     //     return $this->belongsTo('App/SalesOrder');
     // }
+    // relasi
+    public function deliveryorder(){
+        return $this->hasMany('App/DelveryOrder', 'kd_do');
+    }
 }

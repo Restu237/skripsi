@@ -18,8 +18,10 @@ $(document).ready(function () {
                 var data = response;
                 var nama_customer = data.customer["nama_perusahaan"];
                 var alamat_customer = data.customer["alamat"];
+                var kd_kstmr = data.customer["kd_kstmr"];
                 $("#nama_customer").val(nama_customer);
                 $("#alamat_customer").val(alamat_customer);
+                $("#kd_kstmr").val(kd_kstmr);
                 //console.log(data.customer["nama_perusahaan"]);
             },
         });
@@ -53,7 +55,7 @@ $(document).ready(function () {
                     dataTabel +=
                         "<td> <input id='jumlahQty' min='1' value='" +
                         row.jumlah_qty +
-                        "' type='number' name='jumlah_qty' class='form-control jumlahQty'> </td>";
+                        "' type='number' name='qty[]' class='form-control jumlahQty'> </td>";
                 });
                 $("#transaksi tbody").append(dataTabel);
                 var transaksiRow = $("#transaksi tr").length;
@@ -65,6 +67,7 @@ $(document).ready(function () {
                     sum += Number($(this).val());
                 });
                 $("#totalQty").html(sum);
+                $("#total_qty").val(sum);
             },
         });
     });

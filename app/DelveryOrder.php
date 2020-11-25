@@ -30,4 +30,9 @@ class DelveryOrder extends Model
     public function salesorder(){
         return $this->belongsTo('App\SalesOrder', 'kd_so');
     }
+
+    // customer
+    public function customers(){
+        return $this->belongsTo('App\Customer', 'kd_kstmr');
+    }
 }
