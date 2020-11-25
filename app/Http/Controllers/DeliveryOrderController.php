@@ -51,9 +51,6 @@ class DeliveryOrderController extends Controller
     // create function
     public function create(Request $create){
         $data = $create->all();
-        // dd($data['kd_do']);
-        // return response()->json($data, 200);
-        // die;
         $new = new DelveryOrder();
         $new->kd_do = $data['kd_do'];
         $new->kd_so = $data['kd_so'];
@@ -72,5 +69,37 @@ class DeliveryOrderController extends Controller
             ]);
         }
         return redirect()->back()->with('sukses', 'Berhasil Membuat Delivery Order');
+    }
+
+    // update
+    public function update(Request $update, $kd_do = null){
+       if($update->isMethod('PUT')){
+           for ($i=0; $i < count($update->id) ; $i++) {
+               # code...
+               DB::table('do_transaksi')->where('id', $update->id[$i])->update([
+                'qty' => $update->qty[$i],
+               ]);
+           }
+        return redirect()->back()->with('sukses', 'Berhasil Memperbaharui Delivery Order');
+
+
+       }
+       $data = DelveryOrder::find($kd_do);
+       $transaksiDO = do_transaksi::where('kd_do', $kd_do)->with('barang')->get();
+       return view('transaksi.do.update',[
+           'data' => $data,
+           'transaksiDO' => $transaksiDO
+       ]);
+    }
+
+    // delete function
+    public function delete($kd_do){
+        $delete = DelveryOrder::find($kd_do);
+        $transaksiDO = do_transaksi::where('kd_do', $kd_do)->delete();
+        // return response()->json($delete, 200);
+        // die;
+        // $delete->transaksido->delete();
+        $delete->delete();
+        return redirect('/home/transaksi/do')->with('sukses', 'Berhasil Menghapus DO!');
     }
 }

@@ -21,27 +21,36 @@
                     @endif
                     <div class="card">
                         <div class="card-header bg-transparent">
-                            <h2 class="mb-0 text-center"><b>Sales Order Edit Transaksi</b></h2>
+                            <h2 class="mb-0 text-center"><b>Delviery Order</b></h2>
+                            {{-- <button class="btn btn-md btn-info" data-toggle="modal"
+                            data-target="#list-transaksi">List Transaksi DO</button> --}}
                         </div>
-
+                        <form id="formdo" action="{{url('/home/transaksi/do',$data->kd_do)}}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div id="master-transaksi" class="master-transaksi">
                                         <div class="row">
-                                            <label class="col-md-6 pt-2 text-right" for=""><b>No Sales Order</b></label>
+                                            <label class="col-md-6 pt-2 text-right" for=""><b>No Delivery Order</b></label>
                                             <input class="col-md-5 mt-2 form-control form-control-sm" type="text"
-                                                value={{$update->kd_so}} readonly name="kd_so">
+                                                value={{$data->kd_do}} readonly name="kd_do">
                                         </div>
                                         <div class="row">
-                                            {{-- @php
-                                            date_default_timezone_set('Asia/Jakarta');
-                                            $dataTnggal = date("Y-m-d");
-                                            @endphp --}}
                                             <label class="col-md-6 pt-2 text-right" for=""><b>Tanggal</b></label>
                                             <input class="col-md-5 mt-2 mb-2 form-control form-control-sm" type="date"
-                                                value="{{$update->tanggal}}" name="tanggal">
+                                                value="{{$data->tanggal}}" name="tanggal">
 
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-6 text-right" for=""><b>Catatan</b></label>
+                                            <input class="col-md-5 mb-2 form-control form-control-sm" placeholder="Keterangan" value="Catatan" type="text" name="keterangan">
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-6 text-right" for=""><b>Pengirim</b></label>
+                                            <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+                                        <input type="hidden" name="user_id" value="{{$data->user_id}}">
                                         </div>
                                     </div>
                                 </div>
@@ -55,20 +64,25 @@
                                                         <div>
                                                         </div>
                                                         <label class="col-md-4 pt-2 text-right" for="">Pilih
-                                                            Customer</label>
-                                                        <select name="kd_kstmr" id="customersInfo"
-                                                            class="customersInfo form-control form-control-sm col-md-8 mb-1 mt-2">
-                                                            <option value=0>Pilih Customer</option>
-                                                            <option selected value={{$update->kd_kstmr}}>
-                                                                {{$update->kd_kstmr}}</option>
+                                                            SO</label>
+                                                        <select name="kd_so" id="soInfo"
+                                                            class="soInfo form-control form-control-sm col-md-8 mb-1 mt-2">
+                                                            <option aria-readonly="true">Pilih Nomor SO</option>
+                                                            <option selected value={{$data->kd_so}}>
+                                                                {{$data->kd_so}}</option>
+
                                                         </select>
-                                                        <label class="col-md-4 text-right" for="">Nama Customer</label>
-                                                        <input id="nama_customer"
+                                                        <label class="col-md-4 text-right" for="">Nomor Customer</label>
+                                                        <input id="kd_kstmr" readonly
                                                             class="form-control form-control-sm col-md-8 mb-2"
-                                                            value={{$update->customer->nama_perusahaan}} type="text"></input>
-                                                        <label class="col-md-4 text-right" for="">Alamat</label>
-                                                        <textarea id="alamat_customer" class="form-control col-md-8"
-                                                            name="" rows="4">{{$update->customer->alamat}}</textarea>
+                                                            value="" name="kd_kstmr" type="text"></input>
+                                                        <label class="col-md-4 text-right" for="">Nama Customer Sesuai SO</label>
+                                                        <input id="nama_customer" readonly
+                                                            class="form-control form-control-sm col-md-8 mb-2"
+                                                            value="" type="text"></input>
+                                                        <label class="col-md-4 text-right" for="">Alamat Pengiriman SO</label>
+                                                        <textarea readonly id="alamat_customer" class="form-control col-md-8"
+                                                            name="" rows="4"></textarea>
                                                     </div>
                                                 </div>
 
@@ -80,12 +94,6 @@
                             <div class="section-barang">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <div class="form-group">
-                                            {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#searchModal">
-                                                <div class="fas fa-search"></div> Cari Barang
-                                            </button> --}}
-                                        </div>
                                         <table id="transaksi" class="table table-hover pt-2">
                                             <thead>
                                                 <tr>
@@ -93,25 +101,23 @@
                                                     <th scope="col">Nama Barang</th>
                                                     <th scope="col">Harga</th>
                                                     <th scope="col">Qty</th>
-                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
-                                            <form id="formso" action="{{url('/home/transaksi/so',$update->kd_so)}}" method="POST">
-                                                @method('PUT')
-                                            @csrf
                                             <tbody>
-                                               @foreach ($transaksi as $item)
-                                               <tr>
-                                               <input name="id[]" type="hidden" value="{{$item->id}}">
-                                               <input name="kd_kstmr[]" type="hidden" value="{{$item->kd_kstmr}}">
 
-                                                <td> <input type='text' readonly id='nama_barang' name='kd_barang[]' class='form-control' value="{{$item->kd_barang}}"> </td>
-                                                <td> <input type='text' readonly class='form-control' value="Nama Barang"> </td>
-                                                <td> <input type='text' readonly class='form-control' value="Harga Barang"> </td>
-                                                <td> <input id='jumlahQty' min='1' type='number' value="{{$item->jumlah_qty}}" name='jumlah_qty[]' class='form-control jumlahQty'> </td>
-                                                <td><button type="button" name="remove" class="btn btn-danger btn-xs remove"><i class="fas fa-trash text-white"></i></button></td>
+                                                @foreach ($transaksiDO as $item)
+                                            <input type="hidden" name="id[]" value="{{$item->id}}">
+                                                <tr>
+                                                <td> <input type='text' readonly id='nama_barang' name='kd_barang[]' class='form-control' value='{{$item->kd_barang}}'> </td>
+
+                                                <td> <input type='text' readonly class='form-control' value='{{$item->barang->nama_barang}}'> </td>
+
+                                                <td> <input type='text' readonly class='form-control' value='Rp. {{$item->barang->harga_barang}}'> </td>
+
+                                                <td> <input id='jumlahQty' min='1' value='{{$item->qty}}' type='number' name='qty[]' class='form-control jumlahQty'> </td>
                                             </tr>
                                                 @endforeach
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -128,15 +134,15 @@
                                                 <div class="row">
                                                     <div class="dol-md-6"><h3>Jumlah Qty :</h3></div>
                                                     <div class="dol-md-6 pl-2"> <h3><b id="totalQty"></b> </h3></div>
-                                                    <div class="dol-md-6 pl-2"> <h3><b id="totalQty1"></b> </h3></div>
+                                                    <input type="hidden" id="total_qty" name="total_qty">
 
                                                 </div>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-warning btn-md">
-                                             <i class="fas fa-plus"></i> Update SO
+                                             <i class="fas fa-plus"></i> Create DO
                                         </button>
-                                    <a href="/home/transaksi/so/delete/{{$update->kd_so}}" class="btn btn-md btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
+                                        <a href="/home/transaksi/do/delete/{{$data->kd_do}}" class="btn btn-md btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
                                     </div>
                                 </div>
                             </div>

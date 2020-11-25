@@ -21,7 +21,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header bg-transparent">
-                            <h2 class="mb-0 text-center"><b>Sales Order</b></h2>
+                            <h2 class="mb-0 text-center"><b>Delivery Order</b></h2>
                             <button class="btn btn-md btn-info" data-toggle="modal"
                             data-target="#list-transaksi">List Transaksi DO</button>
                         </div>

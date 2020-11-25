@@ -16,4 +16,9 @@ class do_transaksi extends Model
     public function delveryorder(){
         return $this->belongsTo('App\DelveryOrder', 'kd_do');
     }
+
+    // relations to baranag
+    public function barang(){
+        return $this->belongsTo('App\Barang', 'kd_barang');
+    }
 }

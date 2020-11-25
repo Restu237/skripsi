@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/do/so-info-tr/{kd_so}', 'DeliveryOrderController@sotrdata');
     // End Transaksi Panel
     Route::post('do/create', 'DeliveryOrderController@create');
+    Route::match(['get', 'put'], '/home/transaksi/do/{kd_do}', 'DeliveryOrderController@update');
+    Route::get('/home/transaksi/do/delete/{kd_do}', 'DeliveryOrderController@delete');
 
 
 
