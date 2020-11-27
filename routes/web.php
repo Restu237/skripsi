@@ -49,6 +49,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::match(['get', 'put'], '/home/transaksi/do/{kd_do}', 'DeliveryOrderController@update');
     Route::get('/home/transaksi/do/delete/{kd_do}', 'DeliveryOrderController@delete');
 
+    // transaksi invoice
+    Route::get('/home/transaksi/invoice', 'InvoiceController@index');
+    Route::get('/inv/do-info/{kd_do}', 'InvoiceController@diInfo');
+
 
 
 });

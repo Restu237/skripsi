@@ -6,6 +6,29 @@ $(document).ready(function () {
         }
         $(this).val($(this).val().replace(/ +?/g, ""));
     });
+    // invoice form
+    $(".doInfo").change(function(){
+        var kd_do = $(this).val();
+        // ajax function get data
+        $.ajax({
+            url: "/inv/do-info/" + kd_do,
+            type:"get",
+            dataType: "json",
+            success: function(response){
+                var data = response;
+                var kd_so = data["kd_so"];
+                var kd_kstmr = data["kd_kstmr"];
+                var nama_cutomer = data.customers["nama_perusahaan"];
+                var alamat_customers = data.customers["alamat"];
+                $("#kd_so").val(kd_so);
+                $("#kd_kstmr").val(kd_kstmr);
+                $("#nama_customer").val(nama_cutomer);
+                $("#alamat_customer").val(alamat_customers)
+                //console.log(data);
+            }
+        })
+    })
+
     // so form
     $(".soInfo").change(function () {
         var kd_so = $(this).val();
@@ -26,7 +49,6 @@ $(document).ready(function () {
             },
         });
     });
-
     // get data so transaksi
     $("#soInfo").change(function () {
         var kd_so = $(this).val();
