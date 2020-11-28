@@ -7,14 +7,14 @@ $(document).ready(function () {
         $(this).val($(this).val().replace(/ +?/g, ""));
     });
     // invoice form
-    $(".doInfo").change(function(){
+    $(".doInfo").change(function () {
         var kd_do = $(this).val();
         // ajax function get data
         $.ajax({
             url: "/inv/do-info/" + kd_do,
-            type:"get",
+            type: "get",
             dataType: "json",
-            success: function(response){
+            success: function (response) {
                 var data = response;
                 var kd_so = data["kd_so"];
                 var kd_kstmr = data["kd_kstmr"];
@@ -27,6 +27,82 @@ $(document).ready(function () {
                 //console.log(data);
             }
         })
+    })
+
+    // append html table
+    $("#doInfo").change(function () {
+        var kd_do = $(this).val();
+        $.ajax({
+            url: "/inv/do-trksi/" + kd_do,
+            type: "get",
+            dataType: "json",
+            success: function (response) {
+                var dataTabel = "";
+                $.each(response, function (index, row) {
+                    //console.log(row.barang.nama_barang);
+                    dataTabel += "<tr>";
+                    dataTabel +=
+                        "<td> <input type='text' readonly id='nama_barang' name='kd_barang[]' class='form-control' value='" +
+                        row.kd_barang +
+                        "'> </td>";
+                    dataTabel +=
+                        "<td> <input type='text' readonly class='form-control' value='" +
+                        row.barang.nama_barang +
+                        "'> </td>";
+                    dataTabel +=
+                        "<td> <input type='text' readonly class='form-control' value='Rp. " +
+                        row.barang.harga_barang +
+                        "'> </td>";
+                    dataTabel +=
+                        "<td> <input id='jumlahQty' readonly min='1' value='" +
+                        row.qty +
+                        "' type='number' name='qty[]' class='form-control jumlahQty'> </td>";
+                    dataTabel +=
+                        "<td> <input id='amount' readonly value='" +
+                        row.qty * row.barang.harga_barang +
+                        "' type='text' name='amount[]' class='form-control amount'> </td>";
+                });
+                $("#transaksi tbody").append(dataTabel);
+                var sum = 0;
+                $(".amount").each(function () {
+                    sum += Number($(this).val());
+                });
+                $("#total").val(sum);
+            }
+        })
+    })
+
+    $("#diskon").change(function(){
+        var sum = 0;
+        $(".amount").each(function () {
+            sum += Number($(this).val());
+        });
+        var diskon = $("#diskon").val();
+        var diskon1 = diskon / 100;
+        var total1 = diskon1 * sum;
+        var jumlah = sum + total1;
+        $('#total').val(jumlah);
+       $('#grand_total').val(jumlah);
+    })
+
+    $("#ppn").on('click', function(){
+        $('#grand_total').val(0);
+        var ppn = $(this).val();
+        var sebelum_ppn = $('#total').val();
+        var julmlah_ppn = sebelum_ppn * ppn;
+        var grandT = parseInt(julmlah_ppn)+parseInt(sebelum_ppn);
+        $('#jumlahfinalppn').val(julmlah_ppn);
+        $('#grand_total').val(grandT);
+        // console.log(grandT);
+    })
+    $('#nonppn').on('click', function(){
+        $('#grand_total').val(0);
+        var ppn = $(this).val();
+        var sebelum_ppn = $('#total').val();
+        var julmlah_ppn = sebelum_ppn * ppn;
+        var grandT = parseInt(julmlah_ppn)+parseInt(sebelum_ppn);
+        $('#jumlahfinalppn').val(julmlah_ppn);
+        $('#grand_total').val(grandT);
     })
 
     // so form

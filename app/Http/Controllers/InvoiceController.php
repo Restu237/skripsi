@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Invoice;
 use App\DelveryOrder;
+use App\do_transaksi;
 
 
 class InvoiceController extends Controller
@@ -35,6 +36,11 @@ class InvoiceController extends Controller
     public function diInfo($kd_do){
         $doInfo = DelveryOrder::with('salesorder', 'customers')->find($kd_do);
         return response()->json($doInfo);
+    }
 
+    // function to get transaksi
+    public function dtrInfo($kd_do){
+        $trDo = do_transaksi::where('kd_do',$kd_do)->with('barang')->get();
+        return response()->json($trDo);
     }
 }
