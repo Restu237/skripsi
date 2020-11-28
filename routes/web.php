@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/invoice/create', 'InvoiceController@create');
     Route::get('/home/transaksi/invoice/{kd_in}', 'InvoiceController@edit');
     Route::get('/home/transaksi/invoice/delete/{kd_in}', 'InvoiceController@delete');
+    Route::get('/laporan/penjualan/{to}/{from}', 'LaporanController@laporan');
+    Route::get('/home/cetak/laporan/{to}/{from}', 'LaporanController@cetak');
 
 
 

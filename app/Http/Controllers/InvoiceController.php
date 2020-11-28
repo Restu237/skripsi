@@ -61,6 +61,7 @@ class InvoiceController extends Controller
         $buat->kd_so = $data['kd_so'];
         $buat->kd_do = $data['kd_do'];
         $buat->ppn = $data['ppn'];
+        $buat->tanggal = $data['tanggal'];
         $buat->diskon = $data['diskon'];
         $buat->total = $data['total'];
         $buat->grand_total = $data['grand_total'];
