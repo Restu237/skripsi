@@ -19,4 +19,16 @@ class Invoice extends Model
     // deklare keytype
     protected $keyType = 'string';
 
+    // deklare relation with delivery order
+    public function delveryorder(){
+        return $this->belongsTo('App\DelveryOrder', 'kd_do');
+    }
+
+    // customer
+    public function customers(){
+        return $this->belongsTo('App\Customer', 'kd_kstmr');
+    }
+
+    //
+
 }

@@ -25,4 +25,8 @@ class Customer extends Model
     public function deliveryorder(){
         return $this->hasMany('App/DelveryOrder', 'kd_do');
     }
+
+    public function invoices(){
+        return $this->hasMany('App/Invoice','kd_in');
+    }
 }

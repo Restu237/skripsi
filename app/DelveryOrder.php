@@ -35,4 +35,9 @@ class DelveryOrder extends Model
     public function customers(){
         return $this->belongsTo('App\Customer', 'kd_kstmr');
     }
+
+    // invoices
+    public function invoices(){
+        return $this->hasOne('App\Invoice', 'kd_in');
+    }
 }

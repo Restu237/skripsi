@@ -20,4 +20,9 @@ class Barang extends Model
     public function dotransaksi(){
         return $this.hasMany('App\do_transaksi', 'id');
     }
+
+    public function intransaksi(){
+        return $this.hasMany('App\in_transaksi', 'id');
+    }
+
 }

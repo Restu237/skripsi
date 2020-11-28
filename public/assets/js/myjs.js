@@ -80,7 +80,8 @@ $(document).ready(function () {
         var diskon = $("#diskon").val();
         var diskon1 = diskon / 100;
         var total1 = diskon1 * sum;
-        var jumlah = sum + total1;
+        var jumlah = sum - total1;
+        $('#jumlahdiskon').val(total1);
         $('#total').val(jumlah);
        $('#grand_total').val(jumlah);
     })
@@ -91,6 +92,7 @@ $(document).ready(function () {
         var sebelum_ppn = $('#total').val();
         var julmlah_ppn = sebelum_ppn * ppn;
         var grandT = parseInt(julmlah_ppn)+parseInt(sebelum_ppn);
+        $('#jumlahppn').val(julmlah_ppn)
         $('#jumlahfinalppn').val(julmlah_ppn);
         $('#grand_total').val(grandT);
         // console.log(grandT);

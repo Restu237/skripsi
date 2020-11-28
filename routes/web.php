@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/transaksi/invoice', 'InvoiceController@index');
     Route::get('/inv/do-info/{kd_do}', 'InvoiceController@diInfo');
     Route::get('/inv/do-trksi/{kd_do}', 'InvoiceController@dtrInfo');
+    Route::post('/invoice/create', 'InvoiceController@create');
+    Route::get('/home/transaksi/invoice/{kd_in}', 'InvoiceController@edit');
 
 
 
