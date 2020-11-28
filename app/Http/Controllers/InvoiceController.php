@@ -87,4 +87,11 @@ class InvoiceController extends Controller
             'transaksi' => $transaksi
         ]);
     }
+
+    public function delete($kd_in){
+        $transaksi = in_transaksi::where('kd_in', $kd_in)->delete();
+        $invoice = Invoice::find($kd_in);
+        $invoice->delete();
+        return redirect('/home/transaksi/invoice')->with('sukses', 'Berhasil Membatalkan Invoices');
+    }
 }

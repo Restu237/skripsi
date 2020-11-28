@@ -180,9 +180,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <button type="submit" class="btn btn-danger btn-md">
-                                            <i class="fas fa-trash"></i> Batalkan Invoice
-                                        </button>
+                                    <a href="/home/transaksi/invoice/delete/{{$data->kd_in}}" class="btn btn-md btn-danger"><i class="fas fa-trash"></i> Batalkan Invoice</a>
                                     </div>
                                 </div>
                             </div>
