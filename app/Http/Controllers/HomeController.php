@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DelveryOrder;
+use App\Invoice;
+use App\SalesOrder;
+
+
 
 class HomeController extends Controller
 {
@@ -23,6 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.home');
+        $datado = DelveryOrder::get()->count();
+        $datain = Invoice::get()->count();
+        $dataso = SalesOrder::get()->count();
+        return view('dashboard.home',[
+            'datado' => $datado,
+            'datain' => $datain,
+            'dataso' => $dataso
+        ]);
     }
 }
