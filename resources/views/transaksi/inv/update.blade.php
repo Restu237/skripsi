@@ -179,8 +179,11 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <div class="pt-2">
+                                                <a href="/home/transaksi/invoice/delete/{{$data->kd_in}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Batalkan Invoice</a>
+                                                <a href="/home/transaksi/invoice/cetak/{{$data->kd_in}}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i> Show Invoice</a>
+                                            </div>
                                         </div>
-                                    <a href="/home/transaksi/invoice/delete/{{$data->kd_in}}" class="btn btn-md btn-danger"><i class="fas fa-trash"></i> Batalkan Invoice</a>
                                     </div>
                                 </div>
                             </div>

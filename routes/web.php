@@ -62,7 +62,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/laporan/penjualan/{to}/{from}', 'LaporanController@laporan');
     Route::get('/home/cetak/laporan/{to}/{from}', 'LaporanController@cetak');
 
-    //
+    // cetak
+    Route::get('/home/transaksi/invoice/cetak/{kd_in}', 'InvoiceController@cetak');
 
 
 

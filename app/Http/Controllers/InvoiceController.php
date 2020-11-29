@@ -95,4 +95,15 @@ class InvoiceController extends Controller
         $invoice->delete();
         return redirect('/home/transaksi/invoice')->with('sukses', 'Berhasil Membatalkan Invoices');
     }
+
+    public function cetak($kd_in){
+        $data = Invoice::with('customers')->find($kd_in);
+        $transaksiin = in_transaksi::where('kd_in', $kd_in)->with('barangs')->get();
+        //return response()->json($data);
+        //return response()->json($transaksiin);
+        return view('transaksi.inv.cetak',[
+            'data' => $data,
+            'transaksiin' => $transaksiin
+        ]);
+    }
 }
