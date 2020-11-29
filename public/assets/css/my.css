@@ -24,11 +24,37 @@
 }
 
 
-#kalkulasi{
-    background-color:#F8F9FE;
+#kalkulasi {
+    background-color: #F8F9FE;
 
 }
 
 .judul-card {
     font-size: 28px;
+}
+
+@media print {
+    #content-print {
+        width: 100%;
+        margin: 0;
+        float: none;
+    }
+
+    button .btn .btn-md {
+        display: none;
+    }
+}
+
+/** Setting margins */
+/** Setting margins */
+@page {
+    margin: 2cm
+}
+
+.content-print {
+    padding-top: 20px;
+}
+
+.header {
+    border-bottom: solid black 1px;
 }

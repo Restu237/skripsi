@@ -24,6 +24,15 @@ class LaporanController extends Controller
         //return response()->json('berhasil');
         $data=[$to,$from];
         $datalaporan = Invoice::whereBetween('tanggal', [$data[0],$data[1]])->with('customers')->get();
-        return response()->json($datalaporan);
+        // foreach ($datalaporan as $key) {
+        //     # code...
+        //     $totalPajak = $key->ppn;
+        //     return response()->json($totalPajak);
+        //     die;
+        // }
+        return \view('laporan.cetak',[
+            'datalaporan' => $datalaporan,
+            'data' => $data
+        ]);
     }
 }
