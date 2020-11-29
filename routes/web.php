@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('so/create', 'SalesOrderController@create');
     Route::match(['get', 'put'], '/home/transaksi/so/{kd_so}', 'SalesOrderController@update');
     Route::get('/home/transaksi/so/delete/{kd_so}', 'SalesOrderController@delete');
+    // cetak
+    Route::get('//home/transaksi/so/cetak/{kd_so}', 'SalesOrderController@cetak');
 
     // transaksi do
     Route::match(['get', 'post'], '/home/transaksi/do', 'DeliveryOrderController@index');
@@ -58,6 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/transaksi/invoice/delete/{kd_in}', 'InvoiceController@delete');
     Route::get('/laporan/penjualan/{to}/{from}', 'LaporanController@laporan');
     Route::get('/home/cetak/laporan/{to}/{from}', 'LaporanController@cetak');
+
+    //
 
 
 

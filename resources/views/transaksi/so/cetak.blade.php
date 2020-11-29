@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{asset('/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
 
 
-    <title>Print Laporan Penjualan</title>
+<title>{{$data->kd_so}}</title>
 </head>
 
 <body>
@@ -24,21 +24,27 @@
                         </div>
                     </div>
                     <div class="judul-lap">
+
+                        <h5 class="pt-2"><b><u>SALES ORDER</u></b></h5>
+                        <p>
+                        Nomor Sales Order : <b>{{$data->kd_so}}</b>
+                        <br class="pt-1">
+                        </p>
                         @php
-                        $dari = $data[0];
-                        $timestamp = strtotime($dari);
-                        $formattedDate = date('d F Y', $timestamp);
-                        $ke = $data[1];
-                        $timestamp1 = strtotime($ke);
-                        $formattedDate1 = date('d F Y', $timestamp1);
+                        $tanggal1 = $data->tanggal;
+                        $timestamp = strtotime($tanggal1);
+                        $tanggalso = date('d F Y', $timestamp);
                         @endphp
-                        <h2>Laporan Penjualan</h2>
                         <p>
-                            <b>Periode: {{ $formattedDate}} Ke {{$formattedDate1}}</b>
+                            Tanggal : <b>{{$tanggalso}}</b>
+                            <br class="pt-1">
                         </p>
-                        <p>
-                            Dicetak Tanggal {{date('d F Y')}} Oleh <b> {{ Auth::user()->name }}</b>
+
+                        Nama Customer : <b>{{$data->customer->nama_perusahaan}}</b>
+                        <br class="pt-1">
+                        Kode Customer : <b>{{$data->kd_kstmr}}</b>
                         </p>
+
 
                     </div>
                 </div>
@@ -55,6 +61,12 @@
                                     <td><b>Telepon</b></td>
                                     <td>0859-5988-3300</td>
                                 </tr>
+                                <tr>
+                                    <td><b>Alamat Customer</b></td>
+                                    <td>
+                                        {{$data->customer->alamat}}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -65,49 +77,45 @@
                     <table class="table">
                         <thead>
                             <th scope="col"><b>No</b></th>
-                            <th scope="col"><b>Tanggal Transaksi</b></th>
-                            <th scope="col"><b>No. Invoice</b></th>
-                            <th scope="col"><b>Nama Customer</b></th>
-                            <th scope="col"><b>Diskon</b></th>
-                            <th scope="col"><b>Pajak</b></th>
-                            <th scope="col"><b>Jumlah</b></th>
+                            <th scope="col"><b>Kode Barang</b></th>
+                            <th scope="col"><b>Nama Baarang</b></th>
+                            <th scope="col"><b>Harga</b></th>
+                            <th scope="col"><b>Qty</b></th>
                         </thead>
                         <tbody>
                             @php
+                            function rupiah($angka){
+                            $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+                            return $hasil_rupiah;
+                            }
+                            @endphp
+                            @php
                             $nomer = 1;
                             @endphp
-                            @foreach ($datalaporan as $item)
+                            @foreach ($datatransaksi as $item)
                             <tr>
                                 <td>{{$nomer++}}</td>
-                                <td>{{$item->tanggal}}</td>
-                                <td>{{$item->kd_in}}</td>
-                                <td>{{$item->customers->nama_perusahaan}}</td>
-                                <td>{{$item->diskon}}</td>
-                                <td>{{$item->ppn}}</td>
-                                <td>{{$item->grand_total}}</td>
+                                <td>{{$item->kd_barang}}</td>
+                                <td>{{$item->barang->nama_barang}}</td>
+                                <td>{{rupiah($item->barang->harga_barang)}}</td>
+                                <td>{{$item->jumlah_qty}}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <div class="total-kalkulasi d-flex">
-                        @php
-                        function rupiah($angka){
-                        $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
-                        return $hasil_rupiah;
-                        }
-                        @endphp
                         <div class="kanan">
                             <button class="btn btn-md btn-primary d-print-none" onclick="window.print()"> <i class="fas fa-print"></i> Print </button>
                         </div>
                         <div class="ml-auto">
                             <table class="table">
                                 <tr>
-                                    <td><b>Total PPN &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;:</b></td>
-                                    <td><b>{{rupiah($datalaporan->sum('ppn'))}}</b></td>
+                                    <td><b>Total Qty &nbsp;:</b></td>
+                                    <td><b>{{$datatransaksi->sum('jumlah_qty')}}</b></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Total Transaksi :</b></td>
-                                    <td><b>{{rupiah($datalaporan->sum('grand_total'))}}</b></td>
+                                    <td><b>Total Item :</b></td>
+                                    <td><b>{{$datatransaksi->count()}}</b></td>
                                 </tr>
                             </table>
                         </div>

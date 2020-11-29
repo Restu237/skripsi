@@ -133,10 +133,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-warning btn-md">
-                                             <i class="fas fa-plus"></i> Update SO
-                                        </button>
-                                    <a href="/home/transaksi/so/delete/{{$update->kd_so}}" class="btn btn-md btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
+                                        <div>
+                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-plus"></i> Update SO
+                                           </button>
+                                            <a href="/home/transaksi/so/delete/{{$update->kd_so}}" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
+                                            <a href="/home/transaksi/so/cetak/{{$update->kd_so}}" class="btn btn-sm btn-info"> <i class="fas fa-eye"></i>Show SO</a>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
