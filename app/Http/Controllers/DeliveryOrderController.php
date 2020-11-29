@@ -102,4 +102,15 @@ class DeliveryOrderController extends Controller
         $delete->delete();
         return redirect('/home/transaksi/do')->with('sukses', 'Berhasil Menghapus DO!');
     }
+
+    public function cetak($kd_do){
+        $data = DelveryOrder::with('customers')->find($kd_do);
+        $transaksido = do_transaksi::where('kd_do', $kd_do)->with('barang')->get();
+        //return response()->json($data);
+        //return response()->json($transaksido);
+        return view('transaksi.do.cetak',[
+            'data' => $data,
+            'transaksido' => $transaksido
+        ]);
+    }
 }

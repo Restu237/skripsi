@@ -117,8 +117,6 @@ class SalesOrderController extends Controller
     public function cetak($kd_so){
         $data = SalesOrder::with('customer')->find($kd_so);
         $datatransaksi = so_transaksi::where('kd_so', $kd_so)->with('barang')->get();
-        // return response()->json($datatransaksi);
-        // die;
         return view('transaksi.so.cetak',[
             'data' => $data,
             'datatransaksi' => $datatransaksi

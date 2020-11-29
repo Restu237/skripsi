@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('do/create', 'DeliveryOrderController@create');
     Route::match(['get', 'put'], '/home/transaksi/do/{kd_do}', 'DeliveryOrderController@update');
     Route::get('/home/transaksi/do/delete/{kd_do}', 'DeliveryOrderController@delete');
+    Route::get('/home/transaksi/do/cetak/{kd_do}', 'DeliveryOrderController@cetak');
 
     // transaksi invoice
     Route::get('/home/transaksi/invoice', 'InvoiceController@index');

@@ -139,10 +139,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-warning btn-md">
-                                             <i class="fas fa-plus"></i> Create DO
-                                        </button>
-                                        <a href="/home/transaksi/do/delete/{{$data->kd_do}}" class="btn btn-md btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
+                                        <div>
+                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-sheet"></i> Update DO
+                                           </button>
+                                        <a href="/home/transaksi/do/delete/{{$data->kd_do}}" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> Delete SO</a>
+                                        <a href="/home/transaksi/do/cetak/{{$data->kd_do}}" class="btn btn-sm btn-info"> <i class="fas fa-eye"></i>Show</a>
+
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
